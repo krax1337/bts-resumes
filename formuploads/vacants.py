@@ -71,7 +71,7 @@ def get_vacants(fname, pages=None):
         if "Резюме обновлено" in line:
             head_hunter = True
             break
-
+    print(l)
 
 
     if(head_hunter):
@@ -112,14 +112,14 @@ def get_vacants(fname, pages=None):
                     counter_l += 1
             
             if "Опыт работы" in line:
-                cv_summary["experince"] = l[counter+1]
+                cv_summary["experience"] = l[counter+1]
                 counter_l = counter+2
                 
                 while True:
                     if("Резюме обновлено" not in l[counter_l]):
                         if("Образование" in l[counter_l]):
                             break
-                        cv_summary["experince"] += " " + l[counter_l]
+                        cv_summary["experience"] += " " + l[counter_l]
                     
                     counter_l += 1  
         
@@ -134,51 +134,58 @@ def get_vacants(fname, pages=None):
             cv_summary['position'] = key_pos
     
     else:
-        
-        key_words = {
-        "education": ["Образование", "Квалификация", "квалификации",
-        "Курсы",   "Образование"], 
-        
-        "position": ["Специальность", "Цель"], 
-        
-        "skills": ["Навыки", "Дополнительна информация", 
-        "Компьютерная грамотность", "Качества"],
-        
-        "experince": ["Опыт работы"],
-        
-        "language": ["Языки", "Языков", "Язык"],
 
-        "about": ["Обо мне", "Дополнительная информация"],
-        } 
-    
-        cv_summary = {"education": "", "position": "", 
-        "skills": "", "experince": "", "language": "", "about": ""}
-    
+        key_words = {
+            "education": ["Образование", "Квалификация", "квалификации",
+                          "Образование", "Специальность"],
+
+            "position": ["Цель"],
+
+            "skills": ["Навыки", "Дополнительна информация",
+                       "Компьютерная грамотность", "Качества"],
+
+            "experience": ["Опыт работы"],
+
+            "language": ["Языки", "Знание Языков", "Язык "],
+
+            "about": ["Обо мне", "Дополнительная информация", "Дополнительные сведения"],
+        }
+
+        cv_summary = {"education": "", "position": "",
+                      "skills": "", "experience": "", "language": "", "about": ""}
+
         counter_l = -1
-        for line in l:
+        ok = True
+        while (counter_l < len(l) - 1):
             counter_l += 1
             for key in key_words:
                 for word in key_words[key]:
-                    if word in line or word.lower() in line.lower() or word.upper() in line.upper(): 
+                    if word in l[counter_l] or word.lower() in l[counter_l].lower() or word.upper() in l[counter_l].upper():
                         check = True
-                        counter_2 = counter_l+1
-                        while(check):
-                            if(counter_2 >= len(l)-1):
+                        counter_2 = counter_l + 1
+                        while (check):
+                            if (counter_2 >= len(l) - 1):
                                 check = False
                                 counter_2 = 0
                                 break
                             else:
                                 cv_summary[key] += " " + l[counter_2]
                                 counter_2 += 1
-                            
 
-                            
+
                             for key_1 in key_words:
-                                for word_1 in key_words[key_1]:
-                                    if word_1 in l[counter_2]:
-                                        check = False
-                                        counter_2 = 0
-        
+                                if key_1 != key:
+                                    for word_1 in key_words[key_1]:
+                                        if word_1.lower() in l[counter_2].lower():
+                                            check = False
+                                            ok = False
+                                            counter_l = counter_2 - 1
+                                            counter_2 = 0
+                                            break
+                                    if check == False:
+                                        break
+
+
         for key in cv_summary:
             cv_summary[key] = cv_summary[key].replace('.', ' ').replace(',', ' ').split()
 
@@ -186,7 +193,6 @@ def get_vacants(fname, pages=None):
             cv_summary[key] = [ab for ab in cv_summary[key] if not ab in stop_words_k and  not ab in numbers]
     
     
-    print(cv_summary)
 
     recomend = {}
 

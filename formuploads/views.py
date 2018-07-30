@@ -2,25 +2,26 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from xml.etree import ElementTree as ET
 import requests
+from django.http import JsonResponse
+import json
 import urllib
 import os
 import shutil
+import json
 from .vacants import get_vacants
-
 cv_summary={}
 # Create your views here.
 
 def home(request):
 	return render(request, 'formuploads/index.html', {'what':'Upload your CV'})
 
-
-
 def show_json(request):
-	summary="HEER"
-	if 'cv_summary' in request.session:
-		cv = request.session['cv_summary']
-	return render(request, 'formuploads/show_json.html', {'cv_summary':cv})
-
+    summary="HEER"
+    if 'cv_summary' in request.session:
+    	cv = request.session['cv_summary']
+	# return render(request, 'formuploads/show_json.html', {'cv_summary':cv})
+	
+    return HttpResponse(json.dumps(cv,ensure_ascii=False), content_type="application/json")
 def upload(request):
 	
 	all_vacants_info=[{}]

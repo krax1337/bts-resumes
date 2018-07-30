@@ -5,18 +5,17 @@ def docx_to_text(file_path):
     print(file_path)
     doc = docx.Document(file_path)
     result = []
+    for p in doc.paragraphs:
+        txt = p.text.strip()
+        if txt != '':
+            txt = preprocess_text(txt)
+            result.append(txt)
     tables = doc.tables
     for table in tables:
         for row in table.rows:
             for cell in row.cells:
                 for paragraph in cell.paragraphs:
                     result.append(paragraph.text)
-
-    for p in doc.paragraphs:
-        txt = p.text.strip()
-        if txt != '':
-            txt = preprocess_text(txt)
-            result.append(txt)
     return result
 
 
