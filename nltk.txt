@@ -1,0 +1,5 @@
+stopwords
+punkt
+wordnet
+pros_cons
+reuters
