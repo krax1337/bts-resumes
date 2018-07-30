@@ -136,24 +136,30 @@ def get_vacants(fname, pages=None):
     else:
         
         key_words = {
-        "education": ["Образование", "Квалификация", "квалификация", "Квалификации", "квалификации",
-        "Курсы", "курсы", ], 
-        "position": ["Специальность", "специальность","цель", "Цель"], 
-        "skills": ["навыки", "Навыки", "Дополнительна информация", "дополнительна информация",
-        "Компьютерная грамотность","компьютерная грамотность", "качества", "Качества"],
+        "education": ["Образование", "Квалификация", "квалификации",
+        "Курсы",   "Образование"], 
+        
+        "position": ["Специальность", "Цель"], 
+        
+        "skills": ["Навыки", "Дополнительна информация", 
+        "Компьютерная грамотность", "Качества"],
+        
         "experince": ["Опыт работы"],
-        "language" : ["Языки", "языки", "языков", "язык"]
+        
+        "language": ["Языки", "Языков", "Язык"],
+
+        "about": ["Обо мне", "Дополнительная информация"],
         } 
     
         cv_summary = {"education": "", "position": "", 
-        "skills": "", "experince": "", "language": ""}
+        "skills": "", "experince": "", "language": "", "about": ""}
     
         counter_l = -1
         for line in l:
             counter_l += 1
             for key in key_words:
                 for word in key_words[key]:
-                    if word in line: 
+                    if word in line or word.lower() in line.lower() or word.upper() in line.upper(): 
                         check = True
                         counter_2 = counter_l+1
                         while(check):
