@@ -18,14 +18,14 @@ name=""
 root = ET.parse(urllib.request.urlopen(requestURL)).getroot()
 
 def stop_words_kk():        
-    stop_words_kk=[]
-    with open('./stop.txt','rb') as f:
+    stop_words_kk = []
+    with open('./stop.txt', 'rb') as f:
         lines = f.readlines()
         stop_words_kk.append(lines[0])
     return stop_words_kk
 
 stop_words = stopwords.words('russian')
-stop_words_k=stop_words_kk()
+stop_words_k = stop_words_kk()
 for word in stopwords.words('russian'):
     stop_words.append(word.upper())
 
@@ -41,22 +41,22 @@ numbers = ['(', ')' ,'—' ,';',':','[',']',',','»', '«', 'Январь','Фе
                  'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', '1','2','3','4','5','6','7','8','9','года','месяцев','мастер','of','p',
                  '/p','lt','li','/li','gt','/ul','amp','nbsp','ul','/strong']
 
-jobs=dict()
+jobs = dict()
 
 
 
 for job in root.iter('job'):
     job_id = job.attrib.get('id')    
     
-    name=job.find('name').text
-    names=word_tokenize(name)
+    name = job.find('name').text
+    names = word_tokenize(name)
     names = [wor for wor in names if not wor in stop_words and  not wor in string.punctuation]
     names = [word for word in names if not word in stop_words_k and  not word in numbers]
     jobs[job_id]= names
     
-    description=job.find('description').text
+    description = job.find('description').text
     if(description != None):
-        descriptions=word_tokenize(description)
+        descriptions = word_tokenize(description)
         descriptions = [wor for wor in descriptions if not wor in stop_words and  not wor in string.punctuation]
         descriptions = [word for word in descriptions if not word in stop_words_k and  not word in numbers]
         jobs[job_id].extend(descriptions)
@@ -78,7 +78,7 @@ def get_vacants(fname, pages=None):
         cv_summary = {}
         counter = -1
         for line in l:
-            counter+= 1
+            counter += 1
             
             if "Желаемая должность и зарплата" in line:
                 cv_summary["position"] = l[counter+1]
@@ -136,12 +136,12 @@ def get_vacants(fname, pages=None):
     else:
         
         key_words = {
-        "education": ["Образование:", "Квалификация", "квалификация", "Квалификации", "квалификации",
+        "education": ["Образование", "Квалификация", "квалификация", "Квалификации", "квалификации",
         "Курсы", "курсы", ], 
         "position": ["Специальность", "специальность","цель", "Цель"], 
-        "skills": [ "навыки", "Навыки", "Дополнительна информация", "дополнительна информация",
-        "Компьютерная грамотность","компьютерная грамотность", "качества", "Качества" ], 
-        "experince": [ "Опыт работы:"],
+        "skills": ["навыки", "Навыки", "Дополнительна информация", "дополнительна информация",
+        "Компьютерная грамотность","компьютерная грамотность", "качества", "Качества"],
+        "experince": ["Опыт работы"],
         "language" : ["Языки", "языки", "языков", "язык"]
         } 
     
@@ -211,5 +211,5 @@ def get_vacants(fname, pages=None):
             
     print(res_dict)
 
-    return res_dict.keys(),cv_summary
+    return res_dict.keys(), cv_summary
 
