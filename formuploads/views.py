@@ -6,23 +6,28 @@ import urllib
 import os
 import shutil
 from .vacants import get_vacants
+
 cv_summary={}
 # Create your views here.
+
 def home(request):
 	return render(request, 'formuploads/index.html', {'what':'Upload your CV'})
 
 
+
 def show_json(request):
 	summary="HEER"
-	
-	return render(request, 'formuploads/show_json.html', {'cv_summary':cv_summary})
+	if 'cv_summary' in request.session:
+		cv = request.session['cv_summary']
+	return render(request, 'formuploads/show_json.html', {'cv_summary':cv})
 
 def upload(request):
 	
 	all_vacants_info=[{}]
-	cv_summary=dict()
 	vacants_ids=[]
 	vacants_ids, cv_summary= handle_uploaded_file(request.FILES['file'], str(request.FILES['file']))
+	request.session['cv_summary'] = cv_summary
+	
 	all_vacants_info=analyse_file(all_vacants_info,vacants_ids)
 	if request.method == 'POST':
 		return render(request, 'formuploads/success.html', {'vacants':all_vacants_info, 'cv_summary':cv_summary})
