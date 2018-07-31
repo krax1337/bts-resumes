@@ -6,6 +6,7 @@ import urllib
 import os
 import shutil
 import json
+from dicttoxml import dicttoxml
 from .vacants import get_vacants
 from django.views.decorators.csrf import csrf_exempt
 cv_summary = {}
@@ -21,6 +22,13 @@ def show_json(request):
 		cv = request.session['cv_summary']
 	# return render(request, 'formuploads/show_json.html', {'cv_summary':cv})
 	return HttpResponse(json.dumps(cv, ensure_ascii = False), content_type = "application/json")
+
+def show_xml(request):
+	summary = "HEER"
+	if 'cv_summary' in request.session:
+		cv = request.session['cv_summary']
+	# return render(request, 'formuploads/show_json.html', {'cv_summary':cv})
+	return HttpResponse(dicttoxml(cv, custom_root='cv_summary', attr_type=False), content_type = "application/xml")
 
 
 @csrf_exempt
