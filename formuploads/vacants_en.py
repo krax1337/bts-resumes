@@ -7,9 +7,9 @@ for word in stopwords.words('english'):
     stop_words.append(word.upper())
 
 
-numbers = ['(', ')' ,'—' ,';',':','[',']',',','»', '«', 'January', 'February', 'March', 'April', 'May', 'June', 'July',
-                  'August', 'September', 'October', 'November', 'December', '1','2','3','4','5','6','7','8','9','year', 'month', 'months', 'of','p',
-                 '/p','lt','li','/li','gt','/ul','amp','nbsp','ul','/strong']
+numbers = ['(', ')', '—', ';', ':', '[', ']', ',', '»', '«', 'January', 'February', 'March', 'April', 'May', 'June', 'July',
+           'August', 'September', 'October', 'November', 'December', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'year', 'month', 'months', 'of', 'p',
+           '/p', 'lt', 'li', '/li', 'gt', '/ul', 'amp', 'nbsp', 'ul', '/strong']
 
 
 def get_vacants_en(l):
@@ -21,6 +21,7 @@ def get_vacants_en(l):
     if (head_hunter):
         cv_summary = {}
         counter = -1
+        print(l)
         for line in l:
             counter += 1
 
@@ -33,31 +34,9 @@ def get_vacants_en(l):
                     cv_summary["position"] += " " + l[counter_l]
                     counter_l += 1
 
-            if "Skills" in line:
-                cv_summary["skills"] = l[counter + 1]
-                counter_l = counter + 2
-
-                while True:
-                    cv_summary["skills"] += " " + l[counter_l]
-                    counter_l += 1
-                    if ("Further information" in l[counter_l]):
-                        break
-
-            if "Education" in line:
-                cv_summary["education"] = l[counter + 1]
-                counter_l = counter + 2
-
-                while True:
-                    if ("Resume updated" not in l[counter_l]):
-                        if ("Key skills" in l[counter_l]):
-                            break
-                        cv_summary["education"] += " " + l[counter_l]
-
-                    counter_l += 1
-
             if "Work experience" in line:
-                cv_summary["experience"] = l[counter + 1]
-                counter_l = counter + 2
+                cv_summary["experience"] = ""
+                counter_l = counter + 1
 
                 while True:
                     if ("Resume updated" not in l[counter_l]):
@@ -67,9 +46,21 @@ def get_vacants_en(l):
 
                     counter_l += 1
 
+            if "Education" in line:
+                cv_summary["education"] = ""
+                counter_l = counter + 1
+
+                while True:
+                    if ("Resume updated" not in l[counter_l]):
+                        if ("Key skills" in l[counter_l]):
+                            break
+                        cv_summary["education"] += " " + l[counter_l]
+
+                    counter_l += 1
+
             if "Languages" in line:
-                cv_summary["language"] = l[counter + 1]
-                counter_l = counter + 2
+                cv_summary["language"] = ""
+                counter_l = counter + 1
 
                 while True:
                     if ("Resume updated" not in l[counter_l]):
@@ -79,11 +70,36 @@ def get_vacants_en(l):
 
                     counter_l += 1
 
-        for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace('.', ' ').replace(',', ' ').split()
+            if "Skills" in line:
+                cv_summary["skills"] = ""
+                counter_l = counter + 1
 
-            cv_summary[key] = [a for a in cv_summary[key] if not a in stop_words and not a in string.punctuation]
-            cv_summary[key] = [ab for ab in cv_summary[key] if not ab in numbers]
+                while True:
+                    cv_summary["skills"] += " " + l[counter_l]
+                    counter_l += 1
+                    if ("Опыт вождения" or "Further information" in l[counter_l]):
+                        break
+
+            if "About me" in line:
+                cv_summary["about"] = ""
+                counter_l = counter + 1
+
+                while True:
+                    if (counter_l >= len(l)-1):
+                        break
+                    if ("Resume updated" not in l[counter_l]):
+                        cv_summary["about"] += " " + l[counter_l]
+
+                    counter_l += 1
+
+        for key in cv_summary:
+            cv_summary[key] = cv_summary[key].replace(
+                '.', ' ').replace(',', ' ').split()
+
+            cv_summary[key] = [a for a in cv_summary[key]
+                               if not a in stop_words and not a in string.punctuation]
+            cv_summary[key] = [
+                ab for ab in cv_summary[key] if not ab in numbers]
 
         if 'position' in cv_summary:
             key_pos = [x for x in cv_summary["position"] if x != "•"]
@@ -92,19 +108,19 @@ def get_vacants_en(l):
     else:
 
         key_words = {
-            "education": ["Образование", "Квалификация", "квалификации",
-                          "Образование", "Специальность"],
+            "education": ["Education", "Qualification",
+                          "Specialty"],
 
-            "position": ["Цель"],
+            "position": ["Goal"],
 
-            "skills": ["Навыки", "Дополнительна информация",
-                       "Компьютерная грамотность", "Качества"],
+            "skills": ["Skills", "Additional information",
+                       "Computer literacy", "Qualities"],
 
-            "experience": ["Опыт работы"],
+            "experience": ["Work Experience"],
 
-            "language": ["Языки", "Знание Языков", "Язык "],
+            "language": ["Languages", "Knowledge of Languages", "Language"],
 
-            "about": ["Обо мне", "Дополнительная информация", "Дополнительные сведения"],
+            "about": ["About me", "Additional information", "Additional information"],
         }
 
         cv_summary = {"education": "", "position": "",
@@ -139,9 +155,12 @@ def get_vacants_en(l):
                                         break
 
         for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace('.', ' ').replace(',', ' ').split()
+            cv_summary[key] = cv_summary[key].replace(
+                '.', ' ').replace(',', ' ').split()
 
-            cv_summary[key] = [a for a in cv_summary[key] if not a in stop_words and not a in string.punctuation]
-            cv_summary[key] = [ab for ab in cv_summary[key] if not ab in numbers]
+            cv_summary[key] = [a for a in cv_summary[key]
+                               if not a in stop_words and not a in string.punctuation]
+            cv_summary[key] = [
+                ab for ab in cv_summary[key] if not ab in numbers]
 
     return cv_summary

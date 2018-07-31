@@ -32,18 +32,25 @@ def show_xml(request):
 
 @csrf_exempt
 def upload(request):
-#try:
-	all_vacants_info = [{}]
-	vacants_ids = []
-	vacants_ids, cv_summary = handle_uploaded_file(request.FILES['file'], str(request.FILES['file']))
-	request.session['cv_summary'] = cv_summary
-	all_vacants_info = analyse_file(all_vacants_info, vacants_ids)
-#except:
-	#return render(request, 'formuploads/failed.html')
-	if request.method == 'POST':
-		#return HttpResponse(json.dumps(cv_summary, ensure_ascii=False), content_type="application/json")
-		return render(request, 'formuploads/success.html', {'vacants':all_vacants_info, 'cv_summary':cv_summary})
-	return render(request, 'formuploads/failed.html')
+
+    all_vacants_info = [{}]
+    vacants_ids = []
+    vacants_ids, cv_summary = handle_uploaded_file(
+        request.FILES['file'], str(request.FILES['file']))
+    request.session['cv_summary'] = cv_summary
+    all_vacants_info = analyse_file(all_vacants_info, vacants_ids)
+
+    if request.method == 'POST':
+        recommend = [str()]
+        recommend.pop(0)
+        for key in cv_summary:
+            if (len(cv_summary[key]) < 5):
+                recommend.append("У вас слишком мало информации в категории: " +
+                                 str(key) + " добавьте больше информации")
+        recommend_len = len(recommend)
+        return render(request, 'formuploads/success.html', {'vacants': all_vacants_info,
+                                                            'cv_summary': cv_summary, 'recommend': recommend, 'recommend_len': recommend_len})
+    return render(request, 'formuploads/failed.html')
 
 
 def handle_uploaded_file(file, filename):
