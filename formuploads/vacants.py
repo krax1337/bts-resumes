@@ -73,6 +73,7 @@ def get_vacants(fname, pages=None):
     cnt_ru = 0
     for line in l:
         try:
+            print(line)
             if detect(line) == 'en':
                 cnt_en += 1
             if detect(line) == 'ru':
@@ -84,7 +85,6 @@ def get_vacants(fname, pages=None):
     else:
         cv_summary = get_vacants_en(l)
     recomend = {}
-
     for key in jobs:
         for word in jobs[key]:
             for key_1 in cv_summary:

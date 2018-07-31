@@ -116,11 +116,11 @@ def get_vacants_en(l):
             "skills": ["Skills", "Additional information",
                        "Computer literacy", "Qualities"],
 
-            "experience": ["Work Experience"],
+            "experience": ["Work Experience", "Activities"],
 
             "language": ["Languages", "Knowledge of Languages", "Language"],
 
-            "about": ["About me", "Additional information", "Additional information"],
+            "about": ["About me", "Additional information", "Additional information", "Awards"],
         }
 
         cv_summary = {"education": "", "position": "",
