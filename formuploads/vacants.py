@@ -121,6 +121,18 @@ def get_vacants(fname, pages=None):
                             break
                         cv_summary["experience"] += " " + l[counter_l]
                     
+                    counter_l += 1 
+            
+            if "Знание языков" in line:
+                cv_summary["language"] = l[counter+1]
+                counter_l = counter+2
+                
+                while True:
+                    if("Резюме обновлено" not in l[counter_l]):
+                        if("Навыки" in l[counter_l]):
+                            break
+                        cv_summary["language"] += " " + l[counter_l]
+                    
                     counter_l += 1  
         
         for key in cv_summary:
