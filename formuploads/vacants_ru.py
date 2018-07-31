@@ -35,13 +35,18 @@ def get_vacants_ru(l):
             counter += 1
 
             if "Желаемая должность и зарплата" in line:
-                cv_summary["position"] = l[counter + 1]
-                cv_summary["position"] += " " + l[counter + 2]
-                counter_l = counter + 3
-
-                while ("•" in l[counter_l]):
+                cv_summary["position"] = ""
+                counter_l = counter + 1
+                
+                while True:
+                    if("•" in l[counter_l]):
+                        counter_l += 1
+                        cv_summary["position"] += " " + l[counter_l]
+                        if("•" not in l[counter_l]):
+                            break
                     cv_summary["position"] += " " + l[counter_l]
                     counter_l += 1
+
 
             if "Опыт работы" in line:
                 cv_summary["experience"] = ""
@@ -49,7 +54,7 @@ def get_vacants_ru(l):
 
                 while True:
                     if ("Резюме обновлено" not in l[counter_l]):
-                        if ("Education" in l[counter_l]):
+                        if ("Образование" in l[counter_l]):
                             break
                         cv_summary["experience"] += " " + l[counter_l]
 
@@ -61,7 +66,7 @@ def get_vacants_ru(l):
 
                 while True:
                     if ("Резюме обновлено" not in l[counter_l]):
-                        if ("Key skills" in l[counter_l]):
+                        if ("Ключевые навыки" in l[counter_l]):
                             break
                         cv_summary["education"] += " " + l[counter_l]
 
@@ -73,7 +78,7 @@ def get_vacants_ru(l):
 
                 while True:
                     if ("Резюме обновлено" not in l[counter_l]):
-                        if ("Skills" in l[counter_l]):
+                        if ("Навыки" in l[counter_l]):
                             break
                         cv_summary["language"] += " " + l[counter_l]
 
