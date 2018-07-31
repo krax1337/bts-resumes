@@ -10,5 +10,9 @@ def doc_to_text(file_path):
     f = open('./upload/new.txt','r')
     result = []
     for line in f:
-        result.append(line)
+        if line != '\n':
+            line = line.replace('\n', '')
+            line = line.replace('|', '')
+            line = " ".join(line.split())
+            result.append(line)
     return result
