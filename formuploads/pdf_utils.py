@@ -1,8 +1,10 @@
 from io import StringIO
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
+from pdfminer.pdfinterp import PDFPageInterpreter, PDFResourceManager
 from pdfminer.pdfpage import PDFPage
+
 
 def pdf_to_text(fname, pages=None):
     if not pages:
@@ -27,5 +29,5 @@ def pdf_to_text(fname, pages=None):
         line2 = line.strip()
         if line2 != '':
             result.append(line2)
-    print (result)        
+    print(result)
     return result
