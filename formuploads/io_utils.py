@@ -3,6 +3,7 @@ from .pdf_utils import pdf_to_text
 from .docx_utils import docx_to_text
 from .doc_utils import doc_to_text
 
+
 def read_pdf_and_docx(dir_path):
     txt = None
     f = dir_path
