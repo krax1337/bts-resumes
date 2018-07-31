@@ -1,15 +1,17 @@
+import html
 import json
-import requests
-import unicodedata
 import operator
+import os
+import string
+import unicodedata
 import urllib
 import urllib.request
-import string 
-import html
-import os
 from xml.etree import ElementTree as ET
+
+import requests
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+
 from .io_utils import read_pdf_and_docx
 from langdetect import detect
 from .vacants_ru import get_vacants_ru
@@ -43,10 +45,9 @@ numbers = ['(', ')' ,'—' ,';',':','[',']',',','»', '«', 'Январь','Фе
 jobs = dict()
 
 
-
 for job in root.iter('job'):
-    job_id = job.attrib.get('id')    
-    
+    job_id = job.attrib.get('id')
+
     name = job.find('name').text
     names = word_tokenize(name)
     names = [wor for wor in names if not wor in stop_words and not wor in string.punctuation]
@@ -59,7 +60,7 @@ for job in root.iter('job'):
         descriptions = [wor for wor in descriptions if not wor in stop_words and not wor in string.punctuation]
         descriptions = [word for word in descriptions if not word in stop_words_k and not word in numbers]
         jobs[job_id].extend(descriptions)
-    
+
 
 def get_vacants(fname, pages=None):
     l = read_pdf_and_docx(fname)
@@ -106,4 +107,3 @@ def get_vacants(fname, pages=None):
             
 
     return res_dict.keys(), cv_summary
-
