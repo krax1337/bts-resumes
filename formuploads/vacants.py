@@ -167,7 +167,6 @@ def get_vacants(fname, pages=None):
                       "skills": "", "experience": "", "language": "", "about": ""}
 
         counter_l = -1
-        ok = True
         while (counter_l < len(l) - 1):
             counter_l += 1
             for key in key_words:

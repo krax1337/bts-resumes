@@ -17,17 +17,13 @@ def home(request):
 
 
 def show_json(request):
-	summary = "HEER"
 	if 'cv_summary' in request.session:
 		cv = request.session['cv_summary']
-	# return render(request, 'formuploads/show_json.html', {'cv_summary':cv})
 	return HttpResponse(json.dumps(cv, ensure_ascii = False), content_type = "application/json")
 
 def show_xml(request):
-	summary = "HEER"
 	if 'cv_summary' in request.session:
 		cv = request.session['cv_summary']
-	# return render(request, 'formuploads/show_json.html', {'cv_summary':cv})
 	return HttpResponse(dicttoxml(cv, custom_root='cv_summary', attr_type=False), content_type = "application/xml")
 
 
@@ -43,8 +39,14 @@ def upload(request):
 	except:
 		return render(request, 'formuploads/failed.html')
 	if request.method == 'POST':
-		#return HttpResponse(json.dumps(cv_summary, ensure_ascii=False), content_type="application/json")
-		return render(request, 'formuploads/success.html', {'vacants':all_vacants_info, 'cv_summary':cv_summary})
+		recommend = [str()]
+		recommend.pop(0)
+		for key in cv_summary:
+			if (len(cv_summary[key]) < 5):
+				recommend.append( "У вас слишком мало информации в категории: " + str(key) + " добавьте больше информации")
+		recommend_len = len(recommend)
+		return render(request, 'formuploads/success.html', {'vacants':all_vacants_info,
+		 'cv_summary':cv_summary, 'recommend':recommend, 'recommend_len':recommend_len})
 	return render(request, 'formuploads/failed.html')
 
 

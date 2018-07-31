@@ -55,6 +55,16 @@
       
     <header id="header">  Подходящие вакансии </header>
     <br>
+
+    {% if recommend_len > 0 %}
+      <div class="alert alert-warning" role="alert">
+        {% for value in recommend %}
+          {{value}}
+          <br>
+        {% endfor %}
+      </div>
+    {% endif %}
+
     
     <form action="{{ request.build_absolute_uri }}show_json/" method="GET"  >
 
