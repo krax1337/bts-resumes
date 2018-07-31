@@ -33,15 +33,14 @@ def show_xml(request):
 
 @csrf_exempt
 def upload(request):
-	try:
-		all_vacants_info = [{}]
-		vacants_ids = []
-		vacants_ids, cv_summary = handle_uploaded_file(request.FILES['file'], str(request.FILES['file']))
-		request.session['cv_summary'] = cv_summary
-
-		all_vacants_info = analyse_file(all_vacants_info, vacants_ids)
-	except:
-		return render(request, 'formuploads/failed.html')
+#try:
+	all_vacants_info = [{}]
+	vacants_ids = []
+	vacants_ids, cv_summary = handle_uploaded_file(request.FILES['file'], str(request.FILES['file']))
+	request.session['cv_summary'] = cv_summary
+	all_vacants_info = analyse_file(all_vacants_info, vacants_ids)
+#except:
+	#return render(request, 'formuploads/failed.html')
 	if request.method == 'POST':
 		#return HttpResponse(json.dumps(cv_summary, ensure_ascii=False), content_type="application/json")
 		return render(request, 'formuploads/success.html', {'vacants':all_vacants_info, 'cv_summary':cv_summary})

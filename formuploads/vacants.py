@@ -11,11 +11,15 @@ from xml.etree import ElementTree as ET
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from .io_utils import read_pdf_and_docx
+from langdetect import detect
+from .vacants_ru import get_vacants_ru
+from .vacants_en import get_vacants_en
 
-requestURL="https://www.enbek.kz/ru/xml/jooble"
+requestURL = "https://www.enbek.kz/ru/xml/jooble"
 
-name=""
+name = ""
 root = ET.parse(urllib.request.urlopen(requestURL)).getroot()
+
 
 def stop_words_kk():        
     stop_words_kk = []
@@ -24,17 +28,12 @@ def stop_words_kk():
         stop_words_kk.append(lines[0])
     return stop_words_kk
 
+
 stop_words = stopwords.words('russian')
 stop_words_k = stop_words_kk()
 for word in stopwords.words('russian'):
     stop_words.append(word.upper())
 
-
-
-punctuations = ['(', ')' ,'—' ,';',':','[',']',',','»', '«', 'Январь','Февраль',
-                 'Март','Апрель', 'Май', 'Июнь', 'Июль',
-                 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', '1','2','3','4','5','6','7','8','9','года','месяцев','мастер','of','p',
-                 '/p','lt','li','/li','gt','/ul','amp','nbsp','ul','/strong']
 
 numbers = ['(', ')' ,'—' ,';',':','[',']',',','»', '«', 'Январь','Февраль',
                  'Март','Апрель', 'Май', 'Июнь', 'Июль',
@@ -50,162 +49,34 @@ for job in root.iter('job'):
     
     name = job.find('name').text
     names = word_tokenize(name)
-    names = [wor for wor in names if not wor in stop_words and  not wor in string.punctuation]
-    names = [word for word in names if not word in stop_words_k and  not word in numbers]
-    jobs[job_id]= names
+    names = [wor for wor in names if not wor in stop_words and not wor in string.punctuation]
+    names = [word for word in names if not word in stop_words_k and not word in numbers]
+    jobs[job_id] = names
     
     description = job.find('description').text
     if(description != None):
         descriptions = word_tokenize(description)
-        descriptions = [wor for wor in descriptions if not wor in stop_words and  not wor in string.punctuation]
-        descriptions = [word for word in descriptions if not word in stop_words_k and  not word in numbers]
+        descriptions = [wor for wor in descriptions if not wor in stop_words and not wor in string.punctuation]
+        descriptions = [word for word in descriptions if not word in stop_words_k and not word in numbers]
         jobs[job_id].extend(descriptions)
     
 
 def get_vacants(fname, pages=None):
     l = read_pdf_and_docx(fname)
-
-    head_hunter = False
-    
+    cnt_en = 0
+    cnt_ru = 0
     for line in l:
-        if "Резюме обновлено" in line:
-            head_hunter = True
-            break
-    print(l)
-
-
-    if(head_hunter):
-        cv_summary = {}
-        counter = -1
-        for line in l:
-            counter += 1
-            
-            if "Желаемая должность и зарплата" in line:
-                cv_summary["position"] = l[counter+1]
-                cv_summary["position"] += " " + l[counter+2]
-                counter_l = counter + 3
-                    
-                while("•" in l[counter_l]):
-                    cv_summary["position"] += " " + l[counter_l]
-                    counter_l += 1
-            
-            if "Навыки" in line:
-                cv_summary["skills"] = l[counter+1]
-                counter_l = counter+2
-                
-                while True:
-                    cv_summary["skills"] += " " + l[counter_l]
-                    counter_l += 1
-                    if("Опыт вождения" or "Дополнительная информация" in l[counter_l]):
-                        break
-            
-            if "Образование" in line:
-                cv_summary["education"] = l[counter+1]
-                counter_l = counter+2
-                
-                while True:
-                    if("Резюме обновлено" not in l[counter_l]):
-                        if("Ключевые навыки" in l[counter_l]):
-                            break
-                        cv_summary["education"] += " " + l[counter_l]
-                    
-                    counter_l += 1
-            
-            if "Опыт работы" in line:
-                cv_summary["experience"] = l[counter+1]
-                counter_l = counter+2
-                
-                while True:
-                    if("Резюме обновлено" not in l[counter_l]):
-                        if("Образование" in l[counter_l]):
-                            break
-                        cv_summary["experience"] += " " + l[counter_l]
-                    
-                    counter_l += 1 
-            
-            if "Знание языков" in line:
-                cv_summary["language"] = l[counter+1]
-                counter_l = counter+2
-                
-                while True:
-                    if("Резюме обновлено" not in l[counter_l]):
-                        if("Навыки" in l[counter_l]):
-                            break
-                        cv_summary["language"] += " " + l[counter_l]
-                    
-                    counter_l += 1  
-        
-        for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace('.', ' ').replace(',', ' ').split()
-
-            cv_summary[key] = [a for a in cv_summary[key] if not a in stop_words and  not a in string.punctuation]
-            cv_summary[key] = [ab for ab in cv_summary[key] if not ab in stop_words_k and  not ab in numbers]
-
-        if 'position' in cv_summary:
-            key_pos = [x for x in cv_summary["position"]  if x != "•"]
-            cv_summary['position'] = key_pos
-    
+        try:
+            if detect(line) == 'en':
+                cnt_en += 1
+            if detect(line) == 'ru':
+                cnt_ru += 1
+        except:
+            continue
+    if cnt_ru > cnt_en:
+        cv_summary = get_vacants_ru(l)
     else:
-
-        key_words = {
-            "education": ["Образование", "Квалификация", "квалификации",
-                          "Образование", "Специальность"],
-
-            "position": ["Цель"],
-
-            "skills": ["Навыки", "Дополнительна информация",
-                       "Компьютерная грамотность", "Качества"],
-
-            "experience": ["Опыт работы"],
-
-            "language": ["Языки", "Знание Языков", "Язык "],
-
-            "about": ["Обо мне", "Дополнительная информация", "Дополнительные сведения"],
-        }
-
-        cv_summary = {"education": "", "position": "",
-                      "skills": "", "experience": "", "language": "", "about": ""}
-
-        counter_l = -1
-        ok = True
-        while (counter_l < len(l) - 1):
-            counter_l += 1
-            for key in key_words:
-                for word in key_words[key]:
-                    if word in l[counter_l] or word.lower() in l[counter_l].lower() or word.upper() in l[counter_l].upper():
-                        check = True
-                        counter_2 = counter_l + 1
-                        while (check):
-                            if (counter_2 >= len(l) - 1):
-                                check = False
-                                counter_2 = 0
-                                break
-                            else:
-                                cv_summary[key] += " " + l[counter_2]
-                                counter_2 += 1
-
-
-                            for key_1 in key_words:
-                                if key_1 != key:
-                                    for word_1 in key_words[key_1]:
-                                        if word_1.lower() in l[counter_2].lower():
-                                            check = False
-                                            ok = False
-                                            counter_l = counter_2 - 1
-                                            counter_2 = 0
-                                            break
-                                    if check == False:
-                                        break
-
-
-        for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace('.', ' ').replace(',', ' ').split()
-
-            cv_summary[key] = [a for a in cv_summary[key] if not a in stop_words and  not a in string.punctuation]
-            cv_summary[key] = [ab for ab in cv_summary[key] if not ab in stop_words_k and  not ab in numbers]
-    
-    
-
+        cv_summary = get_vacants_en(l)
     recomend = {}
 
     for key in jobs:
@@ -219,7 +90,7 @@ def get_vacants(fname, pages=None):
                             else:
                                 recomend[key] += 1
 
-    recomend_sorted_list = sorted(recomend.items(), key=lambda x: x[1],reverse=True)
+    recomend_sorted_list = sorted(recomend.items(), key=lambda x: x[1], reverse=True)
 
     recomend_sorted_dict = dict(recomend_sorted_list)
 
@@ -233,7 +104,6 @@ def get_vacants(fname, pages=None):
         else:
             res_dict[key] = recomend_sorted_dict[key]
             
-    print(res_dict)
 
     return res_dict.keys(), cv_summary
 

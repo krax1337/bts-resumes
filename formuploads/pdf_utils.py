@@ -4,6 +4,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 
+
 def pdf_to_text(fname, pages=None):
     if not pages:
         pagenums = set()
@@ -27,5 +28,4 @@ def pdf_to_text(fname, pages=None):
         line2 = line.strip()
         if line2 != '':
             result.append(line2)
-    print (result)        
     return result
