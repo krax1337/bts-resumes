@@ -8,3 +8,4 @@ nltk==3.3
 django-bootstrap3==10.0.1
 python-docx==0.8.6
 dicttoxml==1.7.4
+langdetect==1.0.7

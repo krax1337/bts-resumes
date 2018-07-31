@@ -16,10 +16,10 @@ for word in stopwords.words('russian'):
     stop_words.append(word.upper())
 
 
-numbers = ['(', ')' ,'—' ,';',':','[',']',',','»', '«', 'Январь','Февраль',
-                 'Март','Апрель', 'Май', 'Июнь', 'Июль',
-                 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', '1','2','3','4','5','6','7','8','9','года','месяцев', 'of','p',
-                 '/p','lt','li','/li','gt','/ul','amp','nbsp','ul','/strong']
+numbers = ['(', ')', '—', ';', ':', '[', ']', ',', '»', '«', 'Январь', 'Февраль',
+           'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
+           'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'года', 'месяцев', 'of', 'p',
+           '/p', 'lt', 'li', '/li', 'gt', '/ul', 'amp', 'nbsp', 'ul', '/strong']
 
 
 def get_vacants_ru(l):
@@ -43,9 +43,45 @@ def get_vacants_ru(l):
                     cv_summary["position"] += " " + l[counter_l]
                     counter_l += 1
 
+            if "Опыт работы" in line:
+                cv_summary["experience"] = ""
+                counter_l = counter + 1
+
+                while True:
+                    if ("Резюме обновлено" not in l[counter_l]):
+                        if ("Education" in l[counter_l]):
+                            break
+                        cv_summary["experience"] += " " + l[counter_l]
+
+                    counter_l += 1
+
+            if "Образование" in line:
+                cv_summary["education"] = ""
+                counter_l = counter + 1
+
+                while True:
+                    if ("Резюме обновлено" not in l[counter_l]):
+                        if ("Key skills" in l[counter_l]):
+                            break
+                        cv_summary["education"] += " " + l[counter_l]
+
+                    counter_l += 1
+
+            if "Знание языков" in line:
+                cv_summary["language"] = ""
+                counter_l = counter + 1
+
+                while True:
+                    if ("Резюме обновлено" not in l[counter_l]):
+                        if ("Skills" in l[counter_l]):
+                            break
+                        cv_summary["language"] += " " + l[counter_l]
+
+                    counter_l += 1
+
             if "Навыки" in line:
-                cv_summary["skills"] = l[counter + 1]
-                counter_l = counter + 2
+                cv_summary["skills"] = ""
+                counter_l = counter + 1
 
                 while True:
                     cv_summary["skills"] += " " + l[counter_l]
@@ -53,47 +89,26 @@ def get_vacants_ru(l):
                     if ("Опыт вождения" or "Дополнительная информация" in l[counter_l]):
                         break
 
-            if "Образование" in line:
-                cv_summary["education"] = l[counter + 1]
-                counter_l = counter + 2
+            if "Обо мне" in line:
+                cv_summary["about"] = ""
+                counter_l = counter + 1
 
                 while True:
+                    if (counter_l >= len(l)-1):
+                        break
                     if ("Резюме обновлено" not in l[counter_l]):
-                        if ("Ключевые навыки" in l[counter_l]):
-                            break
-                        cv_summary["education"] += " " + l[counter_l]
-
-                    counter_l += 1
-
-            if "Опыт работы" in line:
-                cv_summary["experience"] = l[counter + 1]
-                counter_l = counter + 2
-
-                while True:
-                    if ("Резюме обновлено" not in l[counter_l]):
-                        if ("Образование" in l[counter_l]):
-                            break
-                        cv_summary["experience"] += " " + l[counter_l]
-
-                    counter_l += 1
-
-            if "Знание языков" in line:
-                cv_summary["language"] = l[counter + 1]
-                counter_l = counter + 2
-
-                while True:
-                    if ("Резюме обновлено" not in l[counter_l]):
-                        if ("Навыки" in l[counter_l]):
-                            break
-                        cv_summary["language"] += " " + l[counter_l]
+                        cv_summary["about"] += " " + l[counter_l]
 
                     counter_l += 1
 
         for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace('.', ' ').replace(',', ' ').split()
+            cv_summary[key] = cv_summary[key].replace(
+                '.', ' ').replace(',', ' ').split()
 
-            cv_summary[key] = [a for a in cv_summary[key] if not a in stop_words and not a in string.punctuation]
-            cv_summary[key] = [ab for ab in cv_summary[key] if not ab in stop_words_k and not ab in numbers]
+            cv_summary[key] = [a for a in cv_summary[key]
+                               if not a in stop_words and not a in string.punctuation]
+            cv_summary[key] = [ab for ab in cv_summary[key]
+                               if not ab in stop_words_k and not ab in numbers]
 
         if 'position' in cv_summary:
             key_pos = [x for x in cv_summary["position"] if x != "•"]
@@ -102,8 +117,8 @@ def get_vacants_ru(l):
     else:
 
         key_words = {
-            "education": ["Образование", "Квалификация", "квалификации",
-                          "Образование", "Специальность"],
+            "education": ["Образование", "Квалификация",
+                          "Специальность"],
 
             "position": ["Цель"],
 
@@ -149,9 +164,12 @@ def get_vacants_ru(l):
                                         break
 
         for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace('.', ' ').replace(',', ' ').split()
+            cv_summary[key] = cv_summary[key].replace(
+                '.', ' ').replace(',', ' ').split()
 
-            cv_summary[key] = [a for a in cv_summary[key] if not a in stop_words and not a in string.punctuation]
-            cv_summary[key] = [ab for ab in cv_summary[key] if not ab in stop_words_k and not ab in numbers]
+            cv_summary[key] = [a for a in cv_summary[key]
+                               if not a in stop_words and not a in string.punctuation]
+            cv_summary[key] = [ab for ab in cv_summary[key]
+                               if not ab in stop_words_k and not ab in numbers]
 
     return cv_summary
