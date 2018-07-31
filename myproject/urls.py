@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    
- 	path('', include('formuploads.urls')),
-       
+
+    path('', include('formuploads.urls')),
+
 ]
