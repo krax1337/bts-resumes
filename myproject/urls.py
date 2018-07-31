@@ -18,6 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     
- 	path('formuploads/', include('formuploads.urls')),
+ 	path('', include('formuploads.urls')),
        
 ]
