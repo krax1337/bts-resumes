@@ -177,8 +177,6 @@ def get_vacants_ru(l):
         for key in cv_summary:
             cv_summary[key] = cv_summary[key].replace(
                 '.', ' ').replace(',', ' ').replace(')', '').replace('(', '').split()
-            for n in numbers:
-                cv_summary[key] = cv_summary[key].replace(n,'')
             cv_summary[key] = [a for a in cv_summary[key]
                                if not a in stop_words and not a in string.punctuation]
             cv_summary[key] = [ab for ab in cv_summary[key]
