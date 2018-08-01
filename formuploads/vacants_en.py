@@ -121,7 +121,7 @@ def get_vacants_en(l):
             "skills": ["Skills", "Additional information",
                        "Computer literacy", "Qualities"],
 
-            "experience": ["Work Experience", "Activities"],
+            "experience": ["Work Experience", "Activities", "Work History"],
 
             "language": ["Languages", "Knowledge of Languages", "Language"],
 
