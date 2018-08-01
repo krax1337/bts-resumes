@@ -25,9 +25,10 @@ numbers = ['(', ')','–', '—', ';', ':', '[', ']', ',', '»', '«', 'Янва
 def get_vacants_ru(l):
     head_hunter = False
     for line in l:
-        if "Резюме обновлено" in line:
+        if "Резюме обновлено" in line or "•" in line:
             head_hunter = True
             break
+    print(head_hunter)
     if (head_hunter):
         cv_summary = {"education": "", "position": "",
                       "skills": "", "experience": "", "language": "", "about": ""}
@@ -38,7 +39,7 @@ def get_vacants_ru(l):
                 break
             if "Желаемая должность и зарплата" in l[counter]:
                 counter += 1
-                while('•' not in l[counter]):
+                while("•" not in l[counter]):
                     cv_summary["position"] += " " + l[counter]
                     counter += 1
 
