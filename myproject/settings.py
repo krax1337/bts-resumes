@@ -126,4 +126,4 @@ django_heroku.settings(locals())
 
 BOOTSTRAP3 = {
     'include_jquery': True,
-    }
+}

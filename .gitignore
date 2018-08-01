@@ -3,6 +3,7 @@ myproject/__pycache__
 .vscode/
 .idea/
 __pycache__/
+upload/
 # Compiled source #
 ###################
 *.com
