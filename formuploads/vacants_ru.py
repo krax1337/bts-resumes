@@ -28,6 +28,7 @@ def get_vacants_ru(l):
         if "Резюме обновлено" in line:
             head_hunter = True
             break
+    print(l)
     if (head_hunter):
         cv_summary = {"education": "", "position": "",
                       "skills": "", "experience": "", "language": "", "about": ""}
