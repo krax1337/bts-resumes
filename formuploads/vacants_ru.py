@@ -90,11 +90,10 @@ def get_vacants_ru(l):
                 counter += 1
 
                 while True and counter < len(l):
-                    print(counter)
-                    print(l[counter])
+
                     cv_summary["skills"] += " " + l[counter]
                     counter += 1
-                    print(l[counter])
+
                     if ("Опыт вождения" in l[counter] or "Дополнительная информация" in l[counter]):
                         break
             if counter == len(l):
