@@ -7,7 +7,7 @@ for word in stopwords.words('english'):
     stop_words.append(word.upper())
 
 
-numbers = ['(', ')', '—', ';', ':', '[', ']', ',', '»', '«', 'January', 'February', 'March', 'April', 'May', 'June', 'July',
+numbers = ['(', ')','–', '—', ';', ':', '[', ']', ',', '»', '«', 'January', 'February', 'March', 'April', 'May', 'June', 'July',
            'August', 'September', 'October', 'November', 'December', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'year', 'month', 'months', 'of', 'p',
            '/p', 'lt', 'li', '/li', 'gt', '/ul', 'amp', 'nbsp', 'ul', '/strong']
 
@@ -136,8 +136,9 @@ def get_vacants_en(l):
             counter_l += 1
             for key in key_words:
                 for word in key_words[key]:
-                    if word in l[counter_l] or word.lower() in l[counter_l].lower() or word.upper() in l[counter_l].upper():
+                    if word.lower() in l[counter_l].lower():
                         check = True
+                        cv_summary[key] += " " + l[counter_l].lower().replace(word.lower(), '')
                         counter_2 = counter_l + 1
                         while (check):
                             if (counter_2 >= len(l) - 1):
@@ -161,10 +162,10 @@ def get_vacants_en(l):
 
         for key in cv_summary:
             cv_summary[key] = cv_summary[key].replace(
-                '.', ' ').replace(',', ' ').split()
-
+                '.', ' ').replace(',', ' ').replace(')', '').replace('(', '').split()
             cv_summary[key] = [a for a in cv_summary[key]
                                if not a in stop_words and not a in string.punctuation]
+            
             cv_summary[key] = [
                 ab for ab in cv_summary[key] if not ab in numbers]
 

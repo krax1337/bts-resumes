@@ -1,7 +1,7 @@
 from subprocess import Popen, PIPE
 import os
 import shutil
-
+from .docx_utils import docx_to_text
 
 def doc_to_text(file_path):
     file_path = file_path[:-4]
@@ -9,7 +9,8 @@ def doc_to_text(file_path):
     cmd = 'antiword' + " " + coding + " " ' "./' + file_path + \
         ".doc" + '"' + " " + ">" + " ./upload/" + "new.txt"
     os.system(str(cmd))
-    f = open('./upload/new.txt', 'r')
+    # f = open('./upload/new.txt', 'r')
+    f = docx_to_text('./upload/new.txt')
     result = []
     for line in f:
         if line != '\n':

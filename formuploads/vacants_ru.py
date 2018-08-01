@@ -16,7 +16,7 @@ for word in stopwords.words('russian'):
     stop_words.append(word.upper())
 
 
-numbers = ['(', ')', '—', ';', ':', '[', ']', ',', '»', '«', 'Январь', 'Февраль',
+numbers = ['(', ')','–', '—', ';', ':', '[', ']', ',', '»', '«', 'Январь', 'Февраль',
            'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
            'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'года', 'месяцев', 'of', 'p',
            '/p', 'lt', 'li', '/li', 'gt', '/ul', 'amp', 'nbsp', 'ul', '/strong']
@@ -177,8 +177,9 @@ def get_vacants_ru(l):
 
         for key in cv_summary:
             cv_summary[key] = cv_summary[key].replace(
-                '.', ' ').replace(',', ' ').split()
-
+                '.', ' ').replace(',', ' ').replace(')', '').replace('(', '').split()
+            for n in numbers:
+                cv_summary[key] = cv_summary[key].replace(n,'')
             cv_summary[key] = [a for a in cv_summary[key]
                                if not a in stop_words and not a in string.punctuation]
             cv_summary[key] = [ab for ab in cv_summary[key]
