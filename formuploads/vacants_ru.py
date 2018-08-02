@@ -25,7 +25,7 @@ numbers = ['(', ')','–', '—', ';', ':', '[', ']', ',', '»', '«', 'Янва
 def get_vacants_ru(l):
     head_hunter = False
     for line in l:
-        if "Резюме обновлено" in line or "•" in line:
+        if "Резюме обновлено" in line:
             head_hunter = True
             break
     key_words = ["Желаемая должность и зарплата","Опыт работы","Образование","Ключевые навыки","Знание языков","Навыки","Опыт вождения","Дополнительная информация", "Обо мне"]
@@ -145,7 +145,7 @@ def get_vacants_ru(l):
             "education": ["Образование", "Квалификация",
                           "Специальность"],
 
-            "position": ["Цель"],
+            "position": ["Цель","Желаемая должность и зарплата"],
 
             "skills": ["Навыки", "Дополнительна информация",
                        "Компьютерная грамотность", "Качества"],
@@ -196,5 +196,9 @@ def get_vacants_ru(l):
                                if not a in stop_words and not a in string.punctuation]
             cv_summary[key] = [ab for ab in cv_summary[key]
                                if not ab in stop_words_k and not ab in numbers]
+
+        if 'position' in cv_summary:
+            key_pos = [x for x in cv_summary["position"] if x != "•"]
+            cv_summary['position'] = key_pos
 
     return cv_summary

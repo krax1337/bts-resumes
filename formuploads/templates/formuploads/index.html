@@ -3,41 +3,41 @@
 <html>
 
 <head>
-  <title>Django File Upload</title>
-  <style>
-    h1 {
-      font-size: 2em;
-      font-weight: bold;
-      color: #777777;
-      text-align: center
-    }
+	<title>Django File Upload</title>
+	<style>
+		h1 {
+			font-size: 2em;
+			font-weight: bold;
+			color: #777777;
+			text-align: center
+		}
 
-    table {
-      margin: auto;
-    }
-  </style>
-  {% bootstrap_css %} {% bootstrap_javascript %}
+		table {
+			margin: auto;
+		}
+	</style>
+	{% bootstrap_css %} {% bootstrap_javascript %}
 </head>
 
 <body>
-  <h1>
-    {{what}}
-  </h1>
+	<h1>
+		{{what}}
+	</h1>
 
-  <table>
-    <tr>
-      <td>
+	<table>
+		<tr>
+			<td>
 
-        <form action="{{ request.build_absolute_uri }}upload/" method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          <input class="btn btn-default btn-file" name="file" type="file" hidden/>
-          <br>
-          <input class='btn btn-primary' type="submit" value="Upload File" />
-        </form>
+				<form action="{{ request.build_absolute_uri }}upload/" method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					<input class="btn btn-default btn-file" name="file" type="file" hidden/>
+					<br>
+					<input class='btn btn-primary' type="submit" value="Upload File" />
+				</form>
 
-      </td>
-    </tr>
-  </table>
+			</td>
+		</tr>
+	</table>
 
 </body>
 
