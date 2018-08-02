@@ -7,7 +7,7 @@ app_name = "formuploads"
 urlpatterns = [
     path('', views.home, name="home"),
     path('upload/', views.upload, name="upload"),
-    path('upload/test/', views.show_json, name="test"),
-    path('upload/show_json/', views.test, name="show_json"),
+    path('upload/test/', views.test, name="test"),
+    path('upload/show_json/', views.show_json, name="show_json"),
     path('upload/show_xml/', views.show_xml, name="show_xml"),
 ]
