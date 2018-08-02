@@ -50,7 +50,7 @@
 
   <div class="container-fluid header">
 
-<<<<<<< HEAD
+
     <header id="header"> Подходящие вакансии </header>
     <br> {% if recommend_len > 0 %}
     <div class="alert alert-warning" role="alert">
@@ -71,13 +71,20 @@
     <form action="{{ request.build_absolute_uri }}show_json/" method="GET">
 
       <input class='btn btn-default' type="submit" value="JSON file" />
-      <br>
+      
 
     </form>
 
     <form action="{{ request.build_absolute_uri }}show_xml/" method="GET">
 
       <input class='btn btn-default' type="submit" value="XML file" />
+     
+
+    </form>
+
+    <form action="{{ request.build_absolute_uri }}test/">
+
+      <input class='btn btn-default' type="submit" value="Пройти тест" />
       <br>
 
     </form>
@@ -150,7 +157,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/addons/datatables.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-=======
+
 	<header id="header"> Подходящие вакансии </header>
 	<br> {% if recommend_len > 0 %}
 	<div class="alert alert-warning" role="alert">
@@ -242,7 +249,7 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/addons/datatables.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
->>>>>>> db0235bbb10bc4125a6c9646141fb758ad2a6080
+
 </body>
 
 </html>

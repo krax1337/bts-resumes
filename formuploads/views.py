@@ -52,7 +52,8 @@ def upload(request):
                                                             'cv_summary': cv_summary, 'recommend': recommend, 'recommend_len': recommend_len})
     return render(request, 'formuploads/failed.html')
 
-
+def test(request):
+    return render(request, 'formuploads/test.html')
 def handle_uploaded_file(file, filename):
     if not os.path.exists('upload/'):
         os.mkdir('upload/')

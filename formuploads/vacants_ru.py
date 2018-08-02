@@ -28,10 +28,9 @@ def get_vacants_ru(l):
         if "Резюме обновлено" in line:
             head_hunter = True
             break
-<<<<<<< HEAD
-=======
+
     key_words = ["Желаемая должность и зарплата","Опыт работы","Образование","Ключевые навыки","Знание языков","Навыки","Опыт вождения","Дополнительная информация", "Обо мне","Рекомендации" ]
->>>>>>> db0235bbb10bc4125a6c9646141fb758ad2a6080
+
     if (head_hunter):
         cv_summary = {"education": "", "position": "",
                       "skills": "", "experience": "", "language": "", "about": "", "reference": ""}
