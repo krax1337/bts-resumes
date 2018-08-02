@@ -25,13 +25,13 @@ numbers = ['(', ')','–', '—', ';', ':', '[', ']', ',', '»', '«', 'Янва
 def get_vacants_ru(l):
     head_hunter = False
     for line in l:
-        if "Резюме обновлено" in line or "•" in line:
+        if "Резюме обновлено" in line:
             head_hunter = True
             break
-    key_words = ["Желаемая должность и зарплата","Опыт работы","Образование","Ключевые навыки","Знание языков","Навыки","Опыт вождения","Дополнительная информация", "Обо мне"]
+    key_words = ["Желаемая должность и зарплата","Опыт работы","Образование","Ключевые навыки","Знание языков","Навыки","Опыт вождения","Дополнительная информация", "Обо мне","Рекомендации" ]
     if (head_hunter):
         cv_summary = {"education": "", "position": "",
-                      "skills": "", "experience": "", "language": "", "about": ""}
+                      "skills": "", "experience": "", "language": "", "about": "", "reference": ""}
         counter = -1
         while counter < len(l) - 1:
             counter += 1
@@ -115,6 +115,21 @@ def get_vacants_ru(l):
                         break
             if counter == len(l):
                 break
+            if "Рекомендации" in l[counter]:
+                cv_summary["reference"] = ""
+                counter += 1
+                while True and counter < len(l) - 1:
+                    cv_summary["reference"] += " " + l[counter]
+                    counter += 1
+                    ok = False
+                    for k in key_words:
+                        if (k in l[counter]):
+                            ok = True
+                            break
+                    if ok:
+                        break            
+            if counter == len(l):
+                break
             if "Обо мне" in l[counter]:
                 cv_summary["about"] = ""
                 counter += 1
@@ -145,47 +160,47 @@ def get_vacants_ru(l):
             "education": ["Образование", "Квалификация",
                           "Специальность"],
 
-            "position": ["Цель"],
+            "position": ["Цель", "В поиске"],
 
-            "skills": ["Навыки", "Дополнительна информация",
-                       "Компьютерная грамотность", "Качества"],
+            "skills": ["Навыки",
+                       "Компьютерная грамотность"],
 
-            "experience": ["Опыт работы"],
+            "experience": ["Опыт работы", "трудовая деятельность","Стаж работы"],
 
-            "language": ["Языки", "Знание Языков", "Язык "],
+            "language": ["Языки", "Знание Языков", "Язык ", "Владение языками"],
 
-            "about": ["Обо мне", "Дополнительная информация", "Дополнительные сведения"],
+            "about": ["Обо мне", "Дополнительная информация", "Дополнительные сведения", "Качества","Хобби"],
+            "reference": ["Рекомендации"],
         }
 
         cv_summary = {"education": "", "position": "",
-                      "skills": "", "experience": "", "language": "", "about": ""}
+                      "skills": "", "experience": "", "language": "", "about": "", "reference": "",}
 
         counter_l = -1
         while (counter_l < len(l) - 1):
             counter_l += 1
             for key in key_words:
                 for word in key_words[key]:
-                    if word.lower() in l[counter_l].lower():
+                    if counter_l < len(l) and word.lower() in l[counter_l].lower():
+    
                         check = True
                         cv_summary[key] += " " + l[counter_l].lower().replace(word.lower(), '')
 
-                        counter_2 = counter_l + 1
+                        counter_l += 1
                         while (check):
-                            if (counter_2 >= len(l) - 1):
+                            if (counter_l >= len(l) - 1):
                                 check = False
-                                counter_2 = 0
                                 break
                             else:
-                                cv_summary[key] += " " + l[counter_2]
-                                counter_2 += 1
+                                cv_summary[key] += " " + l[counter_l]
+                                counter_l += 1
 
                             for key_1 in key_words:
                                 if key_1 != key:
                                     for word_1 in key_words[key_1]:
-                                        if word_1.lower() in l[counter_2].lower():
+                                        if word_1.lower() in l[counter_l].lower():
                                             check = False
-                                            counter_l = counter_2 - 1
-                                            counter_2 = 0
+                                            counter_l -= 1
                                             break
                                     if check == False:
                                         break

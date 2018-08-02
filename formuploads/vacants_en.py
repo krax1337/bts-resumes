@@ -19,7 +19,7 @@ def get_vacants_en(l):
             head_hunter = True
             break
     if (head_hunter):
-        key_words = ["Desired position and salary","Work experience","Education","Key skills","Languages", "Skills", "Further information","Опыт вождения", "About me"]
+        key_words = ["Desired position and salary","Work experience","Education","Key skills","Languages", "Skills", "Further information","Опыт вождения", "About me","Recommendations"]
         cv_summary = {"education": "", "position": "",
                       "skills": "", "experience": "", "language": "", "about": ""}
         counter = -1
@@ -107,6 +107,21 @@ def get_vacants_en(l):
                         break
             if counter == len(l):
                 break
+            if "Recommendations" in l[counter]:
+                cv_summary["reference"] = ""
+                counter += 1
+                while True and counter < len(l) - 1:
+                    cv_summary["reference"] += " " + l[counter]
+                    counter += 1
+                    ok = False
+                    for k in key_words:
+                        if (k in l[counter]):
+                            ok = True
+                            break
+                    if ok:
+                        break  
+            if counter == len(l):
+                break
             if "About me" in l[counter]:
                 cv_summary["about"] = ""
                 counter += 1
@@ -141,15 +156,16 @@ def get_vacants_en(l):
             "skills": ["Skills", "Additional information",
                        "Computer literacy", "Qualities"],
 
-            "experience": ["Work Experience", "Activities", "Work History"],
+            "experience": ["Work Experience", "Activities", "Work History", "Affiliations"],
 
             "language": ["Languages", "Knowledge of Languages", "Language"],
 
             "about": ["About me", "Additional information", "Additional information", "Awards"],
+            "reference": ["Recommendations", "References","Reference"],
         }
 
         cv_summary = {"education": "", "position": "",
-                      "skills": "", "experience": "", "language": "", "about": ""}
+                      "skills": "", "experience": "", "language": "", "about": "", "reference": ""}
 
         counter_l = -1
         while (counter_l < len(l) - 1):
