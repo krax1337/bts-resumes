@@ -12,6 +12,7 @@ upload/
 *.exe
 *.o
 *.so
+*.stackdump
 
 # Packages #
 ############

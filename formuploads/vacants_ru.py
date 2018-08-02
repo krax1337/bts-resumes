@@ -160,7 +160,7 @@ def get_vacants_ru(l):
             "education": ["Образование", "Квалификация",
                           "Специальность"],
 
-            "position": ["Цель", "В поиске"],
+            "position": ["Цель", "В поиске","Желаемая должность и зарплата"],
 
             "skills": ["Навыки",
                        "Компьютерная грамотность"],
@@ -211,5 +211,9 @@ def get_vacants_ru(l):
                                if not a in stop_words and not a in string.punctuation]
             cv_summary[key] = [ab for ab in cv_summary[key]
                                if not ab in stop_words_k and not ab in numbers]
+
+        if 'position' in cv_summary:
+            key_pos = [x for x in cv_summary["position"] if x != "•"]
+            cv_summary['position'] = key_pos
 
     return cv_summary
