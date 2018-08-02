@@ -127,7 +127,7 @@ def rtf_to_text(text):
             curskip -= 1
          elif not ignorable:
             out.append(tchar)
-   return ''.join(out).encode("cp1252").decode("cp1251")
+   return ''.join(out).decode("cp1251")
 
 
 
