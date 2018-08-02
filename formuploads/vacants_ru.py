@@ -103,9 +103,7 @@ def get_vacants_ru(l):
             if "Навыки" in l[counter]:
                 cv_summary["skills"] = ""
                 counter += 1
-
-                while True and counter < len(l):
-
+                while True and counter < len(l) - 1:
                     cv_summary["skills"] += " " + l[counter]
                     counter += 1
                     ok = False
@@ -130,7 +128,7 @@ def get_vacants_ru(l):
                     counter += 1
 
         for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace(',', ' ').split()
+            cv_summary[key] = cv_summary[key].replace(',', ' ').replace(')', '').replace('(', '').split()
 
             cv_summary[key] = [a for a in cv_summary[key]
                                if not a in stop_words and not a in string.punctuation]
@@ -193,8 +191,7 @@ def get_vacants_ru(l):
                                         break
 
         for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace(
-                '.', ' ').replace(',', ' ').replace(')', '').replace('(', '').split()
+            cv_summary[key] = cv_summary[key].replace(',', ' ').replace(')', '').replace('(', '').split()
             cv_summary[key] = [a for a in cv_summary[key]
                                if not a in stop_words and not a in string.punctuation]
             cv_summary[key] = [ab for ab in cv_summary[key]
