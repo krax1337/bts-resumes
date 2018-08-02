@@ -136,4 +136,14 @@ def rtf_to_text(text):
 				curskip -= 1
 			elif not ignorable:
 				out.append(tchar)
-	return ''.join(out)
+
+
+	result = []
+	# l = [line.split() for line in ''.join(out)]
+	for line in ''.join(out).split('\n'):
+		line2 = line.strip()
+		if line2 != '':
+			result.append(line2)
+
+	return result
+

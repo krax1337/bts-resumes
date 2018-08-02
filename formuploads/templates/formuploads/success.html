@@ -10,31 +10,31 @@
 
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="css/mdb.min.css" rel="stylesheet">
+	<link href="css/mdb.min.css" rel="stylesheet">
 
-    <link href="css/style.min.css" rel="stylesheet"> -->
+	<link href="css/style.min.css" rel="stylesheet"> -->
 
   <title>Vacancies</title>
 
   <style>
-    #header {
-      color: #ffff;
-      font-size: 23px;
-      background-color: #9DD2E9;
-      padding: 2%;
-      text-align: center;
-    }
+	#header {
+	  color: #ffff;
+	  font-size: 23px;
+	  background-color: #9DD2E9;
+	  padding: 2%;
+	  text-align: center;
+	}
 
-    #success_body {
-      padding: 5px;
-    }
+	#success_body {
+	  padding: 5px;
+	}
 
-    table {
-      font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      font-size: 14px;
-    }
+	table {
+	  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	  font-size: 14px;
+	}
   </style>
 
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -50,6 +50,7 @@
 
   <div class="container-fluid header">
 
+<<<<<<< HEAD
     <header id="header"> Подходящие вакансии </header>
     <br> {% if recommend_len > 0 %}
     <div class="alert alert-warning" role="alert">
@@ -149,6 +150,99 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/addons/datatables.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+=======
+	<header id="header"> Подходящие вакансии </header>
+	<br> {% if recommend_len > 0 %}
+	<div class="alert alert-warning" role="alert">
+	  {% for value in recommend %} {{value}}
+	  <br> {% endfor %}
+	</div>
+	{% endif %}
+
+
+	<form action="{{ request.build_absolute_uri }}show_json/" method="GET">
+
+	  <input class='btn btn-default' type="submit" value="JSON file" />
+	  <br>
+
+	</form>
+
+	<form action="{{ request.build_absolute_uri }}show_xml/" method="GET">
+
+	  <input class='btn btn-default' type="submit" value="XML file" />
+	  <br>
+
+	</form>
+
+
+
+	<div class="table-wrapper">
+
+	  <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+		<thead class="">
+		  <tr>
+			<th class="th-sm" aria-hidden="true">Название работы
+			  <i class="fa fa-sort float-right" aria-hidden="true"></i>
+			</th>
+			<th class="th-sm">Регион
+			  <i class="fa fa-sort float-right" aria-hidden="true"></i>
+			</th>
+			<th class="th-sm">Зарплата
+			  <i class="fa fa-sort float-right" aria-hidden="true"></i>
+			</th>
+			<th class="th-sm">Описание работы
+			  <i class="fa fa-sort float-right" aria-hidden="true"></i>
+			</th>
+			<th class="th-sm">Email
+			  <i class="fa fa-sort float-right" aria-hidden="true"></i>
+			</th>
+			<th class="th-sm">Телефон
+			  <i class="fa fa-sort float-right" aria-hidden="true"></i>
+			</th>
+			<th class="th-sm">Ссылка
+			  <i class="fa fa-sort float-right" aria-hidden="true"></i>
+			</th>
+		  </tr>
+		</thead>
+
+		{% for vacant in vacants %}
+		<tbody>
+		  <tr>
+			{%for key,value in vacant.items%}
+			<td>{{ value }}</td>
+			{%endfor%}
+		  </tr>
+		</tbody>
+		{% endfor %}
+
+	  </table>
+	</div>
+
+
+
+	<!-- <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+	<script type="text/javascript" src="js/popper.min.js"></script>
+
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="js/mdb.min.js"></script> -->
+
+	<!-- <script type="text/javascript">
+	
+	  $(document).ready(function () {
+		$('#dtBasicExample').DataTable({
+		  "paging": false // false to disable pagination (or any other option)
+		});
+		$('.dataTables_length').addClass('bs-select');
+	  });
+	
+	</script>
+
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+>>>>>>> db0235bbb10bc4125a6c9646141fb758ad2a6080
 </body>
 
 </html>
