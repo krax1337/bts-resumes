@@ -53,7 +53,15 @@
     <header id="header"> Подходящие вакансии </header>
     <br> {% if recommend_len > 0 %}
     <div class="alert alert-warning" role="alert">
-      {% for value in recommend %} {{value}}
+      {% for value in recommend %} 
+      
+      {% if "position" in value %} У вас слишком мало информации в категории: Позиция {% endif %}
+      {% if  "education" in value %} У вас слишком мало информации в категории: Образование  {% endif %}
+      {% if "skills" in  value   %}  У вас слишком мало информации в категории: Навыки {% endif %}
+      {% if "experience" in  value   %}У вас слишком мало информации в категории: Опыт работы {% endif %}
+      {% if "language" in value   %}У вас слишком мало информации в категории: Языки {% endif %}
+      {% if "about" in value   %}У вас слишком мало информации в категории: Дополнительная информация {% endif %}
+
       <br> {% endfor %}
     </div>
     {% endif %}

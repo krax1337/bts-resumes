@@ -44,7 +44,7 @@ def upload(request):
         recommend = [str()]
         recommend.pop(0)
         for key in cv_summary:
-            if (len(cv_summary[key]) < 5):
+            if (len(cv_summary[key]) < 5): 
                 recommend.append("У вас слишком мало информации в категории: " +
                                  str(key) + " добавьте больше информации")
         recommend_len = len(recommend)
