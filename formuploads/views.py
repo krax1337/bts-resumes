@@ -10,9 +10,9 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from .vacants import get_vacants
-
+from .jobs import all_jobs, analyse_file
 cv_summary = {}
-all_jobs=dict()
+
 
 def home(request):
     return render(request, 'formuploads/index.html', {'what': 'Upload your CV'})
@@ -52,8 +52,11 @@ def upload(request):
                                                             'cv_summary': cv_summary, 'recommend': recommend, 'recommend_len': recommend_len})
     return render(request, 'formuploads/failed.html')
 
+
 def test(request):
     return render(request, 'formuploads/test.html')
+
+
 def handle_uploaded_file(file, filename):
     if not os.path.exists('upload/'):
         os.mkdir('upload/')
@@ -66,60 +69,3 @@ def handle_uploaded_file(file, filename):
     if os.path.exists('upload/'):
         shutil.rmtree('upload/')
     return results, cv_summary
-
-
-def analyse_file(all_vacants_info, vacants_ids):
-    requestURL = "https://www.enbek.kz/ru/xml/jooble"
-    root = ET.parse(urllib.request.urlopen(requestURL)).getroot()
-    for key in vacants_ids:
-        for job in root.iter('job'):
-            if(job.attrib.get('id') == key):
-                all_vacants_info.append({
-
-                    'job_name': str(job.find('name').text).replace(", ", "", 1),
-                    'job_region': str(job.find('region').text),
-                    "job_salary": str(job.find('salary').text),
-                    "job_description": str(job.find('description').text).replace("p&gt;", " ")
-                                .replace("li", " ").replace("ul", " ")
-                                .replace("/", " ").replace("&gt;", " ")
-                                .replace("&lt;", " ").replace("ul&gt;", " ")
-                                .replace("/li&gt;", " ").replace("li&gt;", " ")
-                                .replace("-&amp;", " ").replace("nbsp;", " ")
-                                .replace("&amp;", " ").replace("quot;", " ")
-                                .replace("br", " ").replace("strong", " ")
-                                .replace("strong", " ").replace("ol", " "),
-                    "job_email": str(job.find('email').text),
-                    "job_phone": str(job.find('phone').text),
-                    "job_link": str(job.find('link').text),
-
-                })
-    return all_vacants_info
-
-def all_jobs():
-    all_jobs=[{}]
-    requestURL = "https://www.enbek.kz/ru/xml/jooble"
-    root = ET.parse(urllib.request.urlopen(requestURL)).getroot()
-    
-    for job in root.iter('job'):
-        
-        all_jobs.append({
-
-                        'job_name': str(job.find('name').text).replace(", ", "", 1),
-                        'job_region': str(job.find('region').text),
-                        "job_salary": str(job.find('salary').text),
-                        "job_description": str(job.find('description').text).replace("p&gt;", " ")
-                                    .replace("li", " ").replace("ul", " ")
-                                    .replace("/", " ").replace("&gt;", " ")
-                                    .replace("&lt;", " ").replace("ul&gt;", " ")
-                                    .replace("/li&gt;", " ").replace("li&gt;", " ")
-                                    .replace("-&amp;", " ").replace("nbsp;", " ")
-                                    .replace("&amp;", " ").replace("quot;", " ")
-                                    .replace("br", " ").replace("strong", " ")
-                                    .replace("strong", " ").replace("ol", " "),
-                        "job_email": str(job.find('email').text),
-                        "job_phone": str(job.find('phone').text),
-                        "job_link": str(job.find('link').text),
-
-                    })
-    return all_jobs   
-
