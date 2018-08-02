@@ -69,3 +69,18 @@ def handle_uploaded_file(file, filename):
     if os.path.exists('upload/'):
         shutil.rmtree('upload/')
     return results, cv_summary
+
+def search(search_type,search_for ):
+    all_jobs_array=all_jobs()
+    found_job=[{}]
+    
+    
+    for value in all_jobs_array[search_type]:      
+        if search_for in value:
+            found_job.append({search_type:value})
+            return found_job
+    return None                
+                    
+
+
+        
