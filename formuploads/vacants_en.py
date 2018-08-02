@@ -19,6 +19,7 @@ def get_vacants_en(l):
             head_hunter = True
             break
     if (head_hunter):
+        key_words = ["Desired position and salary","Work experience","Education","Key skills","Languages", "Skills", "Further information","Опыт вождения", "About me"]
         cv_summary = {"education": "", "position": "",
                       "skills": "", "experience": "", "language": "", "about": ""}
         counter = -1
@@ -43,7 +44,12 @@ def get_vacants_en(l):
 
                 while True and counter < len(l):
                     if ("Resume updated" not in l[counter]):
-                        if ("Education" in l[counter]):
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
                             break
                         cv_summary["experience"] += " " + l[counter]
 
@@ -56,7 +62,12 @@ def get_vacants_en(l):
 
                 while True and counter < len(l):
                     if ("Resume updated" not in l[counter]):
-                        if ("Key skills" in l[counter]):
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
                             break
                         cv_summary["education"] += " " + l[counter]
                     counter += 1
@@ -68,7 +79,12 @@ def get_vacants_en(l):
 
                 while True and counter < len(l):
                     if ("Resume updated" not in l[counter]):
-                        if ("Skills" in l[counter]):
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
                             break
                         cv_summary["language"] += " " + l[counter]
 
@@ -82,7 +98,12 @@ def get_vacants_en(l):
                 while True and counter < len(l):
                     cv_summary["skills"] += " " + l[counter]
                     counter += 1
-                    if ("Further information" in l[counter]):
+                    ok = False
+                    for k in key_words:
+                        if (k in l[counter]):
+                            ok = True
+                            break
+                    if ok:
                         break
             if counter == len(l):
                 break
