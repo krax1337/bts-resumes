@@ -1,4 +1,4 @@
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 <html>
 
@@ -48,7 +48,8 @@
 
 				<form action="{{ request.build_absolute_uri }}upload/" method="POST" enctype="multipart/form-data">
 					{% csrf_token %}
-					<input class="btn btn-default btn-file" name="file" type="file" hidden/>
+					<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
+					<!-- <input class="btn btn-default btn-file" name="file" type="file" hidden/> -->
 					<br>
 					<input class='btn btn-primary' type="submit" value="Upload File" />
 				</form>
