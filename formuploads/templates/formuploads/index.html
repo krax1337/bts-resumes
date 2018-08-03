@@ -31,6 +31,7 @@
 		table {
 			margin: auto;
 		}
+		
 	</style>
 	{% bootstrap_css %} {% bootstrap_javascript %}
 
@@ -51,20 +52,14 @@
 					<br>
 					<input class='btn btn-primary' type="submit" value="Upload File" />
 				</form>
+				
+	<br>
+	<br>
+	<br>
 				<h1>Find your job</h1>
-				<form action="{{ request.build_absolute_uri }}search/" method="POST" enctype="multipart/form-data">
-					{% csrf_token %}
-					<input name="search_text" type="text" class="form-control" placeholder="Поисковый запрос">
-					<br>
-					<h3>Поиск по категориям</h3>
-					<p>
-						<input type="checkbox" name="job_name"> Название работы</p>
-					<p>
-						<input type="checkbox" name="job_region"> Город</p>
-					<p>
-						<input type="checkbox" name="job_description"> Описание</p>
-					<input class='btn btn-primary' type="submit" value="Искать!" onClick="checks"/>
-				</form>
+				
+
+
 
 
 
@@ -72,7 +67,26 @@
 			</td>
 		</tr>
 	</table>
+<center>
+	<form  action="{{ request.build_absolute_uri }}search/" method="GET" enctype="multipart/form-data" >
+			
+		<input  name="search_text" type="text" class="form-control" placeholder="Поисковый запрос" style="width: 700px; text-align:center">
+		<br>
+		<input class='btn btn-primary' type="submit" value="Искать!" name="search_btn"/> 
+		<br>
+		
+		<h3>Поиск по категориям</h3>
+		
+			<input type="checkbox" name="job_name"> Название работы
+	
+			<input type="checkbox" name="job_region"> Город
+		
+			<input type="checkbox" name="job_description"> Описание
+	
+	</form> </center>
 
+
+	<script></script>
 </body>
 
 

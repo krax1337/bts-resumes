@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('upload/', views.upload, name="upload"),
     path('upload/test/', views.test, name="test"),
+    path('upload/search/', views.search_v, name="search"),
     path('upload/show_json/', views.show_json, name="show_json"),
     path('upload/show_xml/', views.show_xml, name="show_xml"),
 ]
