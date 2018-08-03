@@ -77,22 +77,40 @@ def handle_uploaded_file(file, filename):
         shutil.rmtree('upload/')
     return results, cv_summary
 
-def search(search_type="job_name",search_for="" ):
+def search(search_type="job_name",search_text="программист 1с"):
     all_jobs_array=all_jobs()
+    
     found_job=[{}]
     
-    
-    for value in all_jobs_array[search_type]:      
-        if search_for in value:
-            found_job.append({search_type:value})
-            return found_job
-    return None                
+    for value in all_jobs_array:
+        for key in value:
+            if key == search_type and search_text in value[key]:
+                found_job.append(value)
+                    
+
+
+    return found_job                 
                     
 def search_v(request):
-    if(request.GET.get('search_btn')):
-        found_job=search(request.GET.get('search_text'))
+    job_name, job_region, job_description = False, False, False
+    name="job_name"
+    job_name=request.GET.get('job_name')
+    job_region  =request.GET.get('job_region')
+    job_description=request.GET.get('job_description')
 
-    return render(request,'formuploads/search.html', {'found_job':found_job})
+    search_txt = request.GET['search_text']
+    if job_name=='True':
+        name="job_name"
+    if job_region=='True':
+        name="job_region"
+    if job_description=='True':
+        name="job_description"
+
+    found_job=search(name,search_txt)
+    #found_job=search("job_name",search_txt)
+    
+    print(search_txt)
+    return render(request,'formuploads/search.html', {'found_job':found_job, 'check':[job_name,job_region,job_description] , 'name':name})
 
 
 def rate(request):
