@@ -69,24 +69,26 @@
 	</table>
 <center>
 	<form  action="{{ request.build_absolute_uri }}search/" method="GET" enctype="multipart/form-data" >
-			
+		
 		<input  name="search_text" type="text" class="form-control" placeholder="Поисковый запрос" style="width: 700px; text-align:center">
 		<br>
-		<input class='btn btn-primary' type="submit" value="Искать!" name="search_btn"/> 
+		<input class='btn btn-primary' type="submit" value="Искать!"/> 
 		<br>
 		
 		<h3>Поиск по категориям</h3>
 		
-			<input type="checkbox" name="job_name"> Название работы
+			<input type="checkbox"  name="job_name" id="job" value="True"> Название работы
 	
-			<input type="checkbox" name="job_region"> Город
+			<input type="checkbox" name="job_region"  value="True"> Город
 		
-			<input type="checkbox" name="job_description"> Описание
+			<input type="checkbox" name="job_description"  value="True" > Описание
+		
 	
 	</form> </center>
 
 
-	<script></script>
+	<script>
+	;</script>
 </body>
 
 
