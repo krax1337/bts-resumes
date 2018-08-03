@@ -79,8 +79,4 @@ def search(search_type,search_for ):
         if search_for in value:
             found_job.append({search_type:value})
             return found_job
-    return None                
-                    
-
-
-        
+    return None
