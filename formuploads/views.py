@@ -99,33 +99,43 @@ def rate(request):
     if 'cv_summary' in request.session:
         cv = request.session['cv_summary']
     cnt = 0
+    recommendations = []
     if len(cv['skills']) >= 5:
         cnt += uniform(18,20)
     elif len(cv['skills']) > 0:
         cnt += 5
+        recommendations.append('skills')
     if len(cv['education']) >= 5:
         cnt += uniform(18,20)
     elif len(cv['education']) > 0:
         cnt += 5
+        recommendations.append('education')
     if len(cv['experience']) >= 5:
         cnt += uniform(18,20)
     elif len(cv['experience']) > 0:
         cnt += 5    
+        recommendations.append('experience')
     if len(cv['language']) >= 2:
         cnt += uniform(8,10)
     elif len(cv['language']) > 0:
         cnt += 5
+        recommendations.append('language')
     if len(cv['position']) >= 5:
         cnt += uniform(8,10)
     elif len(cv['position']) > 0:
         cnt += 5
+        recommendations.append('position')
     if len(cv['about']) > 0:
         cnt += 5
+    else:
+        recommendations.append('about')
     if len(cv['reference']) > 0:
         cnt += 5
+    else:
+        recommendations.append('reference')    
     cnt += uniform(-3,3)
     if cnt > 100:
         cnt = 100
     if cnt < 0:
         cnt = 0
-    return render(request, 'formuploads/rate.html',{"percentage": int(cnt)})
+    return render(request, 'formuploads/rate.html',{"percentage": int(cnt), "reccomendations": recommendations})
