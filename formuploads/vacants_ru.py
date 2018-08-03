@@ -146,7 +146,7 @@ def get_vacants_ru(l):
             "education": ["Образование", "Квалификация",
                           "Специальность"],
 
-            "position": ["Цель", "В поиске","Желаемая должность и зарплата"],
+            "position": ["Цель", "В поиске","Желаемая должность и зарплата", "Желаемая должность"],
 
             "skills": ["Навыки",
                        "Компьютерная грамотность"],
@@ -165,6 +165,7 @@ def get_vacants_ru(l):
         counter_l = -1
         while (counter_l < len(l) - 1):
             counter_l += 1
+            print(l[counter_l])
             for key in key_words:
                 for word in key_words[key]:
                     if counter_l < len(l) and word.lower() in l[counter_l].lower():
@@ -177,10 +178,6 @@ def get_vacants_ru(l):
                             if (counter_l >= len(l) - 1):
                                 check = False
                                 break
-                            else:
-                                cv_summary[key] += " " + l[counter_l]
-                                counter_l += 1
-
                             for key_1 in key_words:
                                 if key_1 != key:
                                     for word_1 in key_words[key_1]:
@@ -190,6 +187,11 @@ def get_vacants_ru(l):
                                             break
                                     if check == False:
                                         break
+                            if not check:
+                                break
+                            else:
+                                cv_summary[key] += " " + l[counter_l]
+                                counter_l += 1
 
         for key in cv_summary:
             cv_summary[key] = cv_summary[key].replace(',', ' ').replace(')', '').replace('(', '').split()
