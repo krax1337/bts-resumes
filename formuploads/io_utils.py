@@ -9,7 +9,6 @@ from .rtf_utils import rtf_to_text
 def read_pdf_and_docx(dir_path):
     txt = None
     f = dir_path
-    print(dir_path)
     if f.lower().endswith('.docx'):
         txt = docx_to_text(f)
     elif f.lower().endswith('.pdf'):

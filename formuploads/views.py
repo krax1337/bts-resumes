@@ -50,11 +50,17 @@ def upload(request):
         recommend_len = len(recommend)
         return render(request, 'formuploads/success.html', {'vacants': all_vacants_info,
                                                             'cv_summary': cv_summary, 'recommend': recommend, 'recommend_len': recommend_len})
-    return render(request, 'formuploads/failed.html')
+    return render(request, 'formuploads/failed.html', {'error': 'Невозможно загрузить резюме'})
 
 
 def test(request):
-    return render(request, 'formuploads/test.html')
+    if 'cv_summary' in request.session:
+        cv = request.session['cv_summary']
+    for k in cv:
+        for v in cv[k]:
+            if "C++" in v or "c++" in v:
+                return render(request, 'formuploads/test.html')
+    return render(request, 'formuploads/failed.html', {'error': 'Нет подходящего теста для вас'})
 
 
 def handle_uploaded_file(file, filename):
@@ -86,9 +92,3 @@ def search_v(request):
         found_job=search(request.GET.get('search_text'))
 
     return render(request,'formuploads/search.html', {'found_job':found_job})
-
-
-    
-
-
-        

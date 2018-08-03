@@ -172,7 +172,7 @@ def get_vacants_en(l):
             counter_l += 1
             for key in key_words:
                 for word in key_words[key]:
-                    if word.lower() in l[counter_l].lower():
+                    if counter_l < len(l) and word.lower() in l[counter_l].lower():
                         check = True
                         cv_summary[key] += " " + l[counter_l].lower().replace(word.lower(), '')
                         counter_l += 1
