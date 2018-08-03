@@ -70,7 +70,7 @@ def handle_uploaded_file(file, filename):
         shutil.rmtree('upload/')
     return results, cv_summary
 
-def search(search_type,search_for ):
+def search(search_type="job_name",search_for="" ):
     all_jobs_array=all_jobs()
     found_job=[{}]
     
@@ -79,4 +79,16 @@ def search(search_type,search_for ):
         if search_for in value:
             found_job.append({search_type:value})
             return found_job
-    return None
+    return None                
+                    
+def search_v(request):
+    if(request.GET.get('search_btn')):
+        found_job=search(request.GET.get('search_text'))
+
+    return render(request,'formuploads/search.html', {'found_job':found_job})
+
+
+    
+
+
+        
