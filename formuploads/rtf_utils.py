@@ -137,10 +137,14 @@ def rtf_to_text(text):
 			elif not ignorable:
 				out.append(tchar)
 
+	text_1 = ''.join(out)
+	try:
+		text_1 = text_1.encode("cp1252").decode("cp1251")
+	except:
+		pass
 
 	result = []
-	# l = [line.split() for line in ''.join(out)]
-	for line in ''.join(out).split('\n'):
+	for line in text_1.split('\n'):
 		line2 = line.strip()
 		if line2 != '':
 			result.append(line2)
