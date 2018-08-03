@@ -16,82 +16,92 @@
 		table {
 			margin: auto;
 		}
+		.container {
+			margin-top: 10px;
+		}
+		.panel {
+			box-shadow: none !important;
+		}
 	</style>
 	{% bootstrap_css %} {% bootstrap_javascript %}
 
-	<title>Django File Upload</title>
-	<style>
-		h1 {
-			font-size: 2em;
-			font-weight: bold;
-			color: #777777;
-			text-align: center
-		}
-
-		table {
-			margin: auto;
-		}
-		
-	</style>
-	{% bootstrap_css %} {% bootstrap_javascript %}
 
 </head>
 
 <body>
-	<h1>
-		Upload your CV
-	</h1>
-
-	<table>
-		<tr>
-			<td>
-
-				<form action="{{ request.build_absolute_uri }}upload/" method="POST" enctype="multipart/form-data">
-					{% csrf_token %}
-					<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
-					<!-- <input class="btn btn-default btn-file" name="file" type="file" hidden/> -->
-					<br>
-					<input class='btn btn-primary' type="submit" value="Upload File" />
-				</form>
-				
-	<br>
-	<br>
-	<br>
-				<h1>Find your job</h1>
-				
-
-
-
-
-
-
-			</td>
-		</tr>
-	</table>
-<center>
-	<form  action="{{ request.build_absolute_uri }}search/" method="GET" enctype="multipart/form-data" >
-		
-		<input  name="search_text" type="text" class="form-control" placeholder="Поисковый запрос" style="width: 700px; text-align:center">
+	<center>
 		<br>
-		<input class='btn btn-primary' type="submit" value="Искать!"/> 
 		<br>
-		
-		<h3>Поиск по категориям</h3>
-		
-			<input type="checkbox"  name="job_name" id="job" value="True"> Название работы
-	
-			<input type="checkbox" name="job_region"  value="True"> Город
-		
-			<input type="checkbox" name="job_description"  value="True" > Описание
-		
-	
-	</form> </center>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<h1>Найди свою работу</h1>
+		<form action="{{ request.build_absolute_uri }}search/" method="GET" enctype="multipart/form-data">
+
+			<input name="search_text" type="text" class="form-control" placeholder="Программист от бога" style="width: 700px; text-align:center">
+			<br>
+			<h3>Поиск по категориям</h3>
+
+			<input type="checkbox" name="job_name" id="job" value="True"> Название работы
+
+			<input type="checkbox" name="job_region" value="True"> Город
+
+			<input type="checkbox" name="job_description" value="True"> Описание
+			<br>
+			<br>
+
+			<input class='btn btn-success' type="submit" value="Найти работу мечты!" />
+
+			
+					<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+							Или загрузить своё резюме
+					</button>
 
 
+
+			
+
+
+		</form>
+	</center>
+	
+
+	
+		<div class="collapse" id="collapseExample">
+
+					<table>
+							<tr>
+								<td>
+									<br>
+									
+									<form action="{{ request.build_absolute_uri }}upload/" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="file">
+										<!-- <input class="btn btn-default btn-file" name="file" type="file" hidden/> -->
+										<br>
+										<center>					<input class='btn btn-primary' type="submit" value="Загрузить" /></center>
+					
+									</form>
+					
+					
+									</td>
+							</tr>
+						</table>
+				
+
+		</div>
+
+	<!-- <h1>
+		Загрузить резюме
+	</h1> -->
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 	<script>
-	;</script>
+
+	</script>
 </body>
-
-
-
 </html>
