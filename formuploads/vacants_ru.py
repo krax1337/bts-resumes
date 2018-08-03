@@ -33,7 +33,7 @@ def get_vacants_ru(l):
 
     if (head_hunter):
         cv_summary = {"education": "", "position": "",
-                      "skills": "", "experience": "", "language": "", "about": "", "reference": ""}
+                      "skills": "", "experience": "", "language": "", "about": "", "reference": "", "other": ""}
         counter = -1
         while counter < len(l) - 1:
             counter += 1
@@ -44,92 +44,125 @@ def get_vacants_ru(l):
                 while('•' not in l[counter]):
                     cv_summary["position"] += " " + l[counter]
                     counter += 1
-
                 while ("•" in l[counter]):
                     cv_summary["position"] += " " + l[counter]
                     counter += 1
+
             if counter == len(l):
                 break
             if "Опыт работы" in l[counter]:
                 cv_summary["experience"] = ""
                 counter += 1
-
                 while counter < len(l):
                     if ("Резюме обновлено" not in l[counter]):
-                        if ("Образование" in l[counter]):
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
                             break
                         cv_summary["experience"] += " " + l[counter]
-
                     counter += 1
+
             if counter == len(l):
                 break
             if "Образование" in l[counter]:
                 cv_summary["education"] = ""
                 counter += 1
-
                 while counter < len(l):
                     if ("Резюме обновлено" not in l[counter]):
-                        if ("Ключевые навыки" in l[counter]):
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
                             break
                         cv_summary["education"] += " " + l[counter]
                     counter += 1
+
             if counter == len(l):
                 break
             if "Знание языков" in l[counter]:
                 cv_summary["language"] = ""
                 counter += 1
-
                 while counter < len(l):
                     if ("Резюме обновлено" not in l[counter]):
-                        if ("Навыки" in l[counter]):
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
                             break
                         cv_summary["language"] += " " + l[counter]
-
                     counter += 1
+
             if counter == len(l):
                 break
             if "Навыки" in l[counter]:
                 cv_summary["skills"] = ""
                 counter += 1
+                while counter < len(l) - 1:
+                    if ("Резюме обновлено" not in l[counter]):
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
+                            break
+                        cv_summary["skills"] += " " + l[counter]
+                    counter += 1
+                    
 
+            if counter == len(l):
+                break
+            if "Опыт вождения" in l[counter]:
+                cv_summary["other"] = ""
+                counter += 1
                 while counter < len(l):
-
-                    cv_summary["skills"] += " " + l[counter]
+                    if ("Резюме обновлено" not in l[counter]):    
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
+                            break
+                        cv_summary["other"] += " " + l[counter]
                     counter += 1
 
-                    if ("Опыт вождения" in l[counter] or "Дополнительная информация" in l[counter]):
-                        break
             if counter == len(l):
                 break
             if "Рекомендации" in l[counter]:
                 cv_summary["reference"] = ""
                 counter += 1
-                while True and counter < len(l) - 1:
-                    cv_summary["reference"] += " " + l[counter]
-                    counter += 1
-                    ok = False
-                    for k in key_words:
-                        if (k in l[counter]):
-                            ok = True
+                while counter < len(l):
+                    if ("Резюме обновлено" not in l[counter]):
+                        ok = False
+                        for k in key_words:
+                            if (k in l[counter]):
+                                ok = True
+                                break
+                        if ok:
                             break
-                    if ok:
-                        break            
+                        cv_summary["reference"] += " " + l[counter]
+                    counter += 1
+                                    
             if counter == len(l):
                 break
             if "Обо мне" in l[counter]:
                 cv_summary["about"] = ""
                 counter += 1
-
                 while counter < len(l):
-                    if (counter >= len(l)-1):
-                        break
                     if ("Резюме обновлено" not in l[counter]):
                         cv_summary["about"] += " " + l[counter]
-
                     counter += 1
 
         for key in cv_summary:
-            cv_summary[key] = cv_summary[key].replace(',', ' ').split()
+            cv_summary[key] = cv_summary[key].replace(',', ' ').replace(')', '').replace('(', '').split()
 
             cv_summary[key] = [a for a in cv_summary[key]
                                if not a in stop_words and not a in string.punctuation]
@@ -146,25 +179,27 @@ def get_vacants_ru(l):
             "education": ["Образование", "Квалификация",
                           "Специальность"],
 
-            "position": ["Цель", "В поиске","Желаемая должность и зарплата"],
+            "position": ["Цель", "В поиске","Желаемая должность и зарплата", "Желаемая должность"],
 
             "skills": ["Навыки",
                        "Компьютерная грамотность"],
 
-            "experience": ["Опыт работы", "трудовая деятельность","Стаж работы"],
+            "experience": ["Опыт работы", "трудовая деятельность","Стаж работы", "Профессиональный опыт"],
 
             "language": ["Языки", "Знание Языков", "Язык ", "Владение языками"],
 
-            "about": ["Обо мне", "Дополнительная информация", "Дополнительные сведения", "Качества","Хобби"],
+            "about": ["Обо мне", "Дополнительная информация", "Дополнительные сведения", "Качества", "Достижения", "Сведения о себе"],
             "reference": ["Рекомендации"],
+            "other": ["Хобби", "Водительское удостоверение", "Интересы"],
         }
 
         cv_summary = {"education": "", "position": "",
-                      "skills": "", "experience": "", "language": "", "about": "", "reference": "",}
+                      "skills": "", "experience": "", "language": "", "about": "", "reference": "", "other": ""}
 
         counter_l = -1
         while (counter_l < len(l) - 1):
             counter_l += 1
+            print(l[counter_l])
             for key in key_words:
                 for word in key_words[key]:
                     if counter_l < len(l) and word.lower() in l[counter_l].lower():
@@ -174,13 +209,9 @@ def get_vacants_ru(l):
 
                         counter_l += 1
                         while (check):
-                            if (counter_l >= len(l) - 1):
+                            if (counter_l > len(l) - 1):
                                 check = False
                                 break
-                            else:
-                                cv_summary[key] += " " + l[counter_l]
-                                counter_l += 1
-
                             for key_1 in key_words:
                                 if key_1 != key:
                                     for word_1 in key_words[key_1]:
@@ -190,6 +221,11 @@ def get_vacants_ru(l):
                                             break
                                     if check == False:
                                         break
+                            if not check:
+                                break
+                            else:
+                                cv_summary[key] += " " + l[counter_l]
+                                counter_l += 1
 
         for key in cv_summary:
             cv_summary[key] = cv_summary[key].replace(',', ' ').replace(')', '').replace('(', '').split()

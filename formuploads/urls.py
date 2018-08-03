@@ -12,4 +12,5 @@ urlpatterns = [
    
     path('upload/show_json/', views.show_json, name="show_json"),
     path('upload/show_xml/', views.show_xml, name="show_xml"),
+    path('upload/rate/', views.rate, name = 'rate')
 ]
