@@ -52,21 +52,7 @@
 
 
     <header id="header"> Подходящие вакансии </header>
-    <br> {% if recommend_len > 0 %}
-    <div class="alert alert-warning" role="alert">
-      {% for value in recommend %} 
-      
-      {% if "position" in value %} У вас слишком мало информации в категории: Позиция {% endif %}
-      {% if "education" in value %} У вас слишком мало информации в категории: Образование  {% endif %}
-      {% if "skills" in  value   %}  У вас слишком мало информации в категории: Навыки {% endif %}
-      {% if "experience" in  value   %}У вас слишком мало информации в категории: Опыт работы {% endif %}
-      {% if "language" in value   %}У вас слишком мало информации в категории: Языки {% endif %}
-      {% if "about" in value   %}У вас слишком мало информации в категории: Дополнительная информация {% endif %}
-      {% if "reference" in value   %}У вас слишком мало информации в категории: Рекомендации {% endif %}
-
-      <br> {% endfor %}
-    </div>
-    {% endif %}
+    <br> 
 
 
     <form action="{{ request.build_absolute_uri }}show_json/" method="GET">
@@ -82,12 +68,7 @@
 
     </form>
 
-    <form action="{{ request.build_absolute_uri }}test/">
 
-      <input class='btn btn-default' type="submit" value="Пройти тест" />
-      <br>
-
-    </form>
     <form action="{{ request.build_absolute_uri }}rate/">
 
       <input class='btn btn-default' type="submit" value="Оцени свое резюме" />
