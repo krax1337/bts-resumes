@@ -18,7 +18,6 @@ def read_pdf_and_docx(dir_path):
         txt = doc_to_text(f)
     elif f.lower().endswith('.rtf'):
         txt = rtf_to_text(f)
-    print(txt)
     if len(txt) <= 1:
         f1 = f[:-4]
         print(f1)

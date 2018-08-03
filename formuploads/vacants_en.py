@@ -177,7 +177,7 @@ def get_vacants_en(l):
                         cv_summary[key] += " " + l[counter_l].lower().replace(word.lower(), '')
                         counter_l += 1
                         while (check):
-                            if (counter_l >= len(l) - 1):
+                            if (counter_l > len(l) - 1):
                                 check = False
                                 break
                             for key_1 in key_words:
