@@ -160,8 +160,8 @@ def get_vacants_en(l):
 
             "language": ["Languages", "Knowledge of Languages", "Language"],
 
-            "about": ["About me", "Additional information", "Additional information", "Awards"],
-            "reference": ["Recommendations", "References","Reference"],
+            "about": ["About me", "Additional information", "Additional information", "Awards","Achievements","interests"],
+            "reference": ["Recommendations", "References","Reference", "Referees"],
         }
 
         cv_summary = {"education": "", "position": "",
