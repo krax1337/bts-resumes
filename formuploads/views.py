@@ -84,7 +84,7 @@ def search(search_type="job_name",search_text="программист 1с"):
     
     for value in all_jobs_array:
         for key in value:
-            if key == search_type and search_text in value[key]:
+            if key == search_type and search_text.lower() in value[key].lower():
                 found_job.append(value)
                     
 
@@ -107,7 +107,7 @@ def search_v(request):
         name="job_description"
 
     found_job=search(name,search_txt)
-    #found_job=search("job_name",search_txt)
+    
     
     print(search_txt)
     return render(request,'formuploads/search.html', {'found_job':found_job, 'check':[job_name,job_region,job_description] , 'name':name})
