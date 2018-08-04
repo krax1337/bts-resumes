@@ -17,8 +17,14 @@
 	  background-color: #9DD2E9;
 	  padding: 2%;
 	  text-align: center;
+    border-top-left-radius:5px;
+border-top-right-radius:5px;
+border-bottom-right-radius:5px;
+border-bottom-left-radius:5px;
 	}
-
+  form {
+    display: inline-block;
+}
 	#success_body {
 	  padding: 5px;
 	}
@@ -30,6 +36,7 @@
   td {
     word-wrap: break-word;
     max-width: 15px;
+    background-color: #ffff;
   }
   </style>
 
@@ -50,27 +57,19 @@
     <header id="header"> Подходящие вакансии </header>
     <br> 
 
-
     <form action="{{ request.build_absolute_uri }}show_json/" method="GET">
- 
-      <input class='btn btn-default' type="submit" value="JSON file" />
-
+    <input class='btn btn-outline-primary' type="submit" value="JSON file" />
     </form>
 
+    
     <form action="{{ request.build_absolute_uri }}show_xml/" method="GET">
-
-      <input class='btn btn-default' type="submit" value="XML file" />
-     
-
+    <input class='btn btn-outline-success' type="submit" value="XML file" />
     </form>
 
-
-    <form action="{{ request.build_absolute_uri }}rate/">
-
-      <input class='btn btn-default' type="submit" value="Оцени свое резюме" />
-      <br>
-
-    </form>
+    
+    <form action="{{ request.build_absolute_uri }}rate/" method="GET">
+    <input class='btn btn-outline-danger' type="submit" value="Оцени свое резюме" />
+    </form> 
 
 
     <div class="table-wrapper">
