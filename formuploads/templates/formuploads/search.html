@@ -1,5 +1,4 @@
-{{check}}
-{{name}}
+
 {% load bootstrap4 %}
 
 <html>
@@ -25,10 +24,14 @@
 	  padding: 5px;
 	}
 
-	table {
+	#dtBasicExample {
 	  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 	  font-size: 14px;
 	}
+  td {
+    word-wrap: break-word;
+    max-width: 15px;
+  }
   </style>
 
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -40,10 +43,8 @@
 <body id="success_body">
 
     <div class="container-fluid header">
-
-
-        <header id="header"> Результаты поиска </header>
-        </div>
+    <header id="header"> Результаты поиска </header>
+        
         <br>
 <div class="table-wrapper">
 
