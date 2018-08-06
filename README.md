@@ -1,4 +1,4 @@
-# 💖[Наш сайт]💖(https://bts-resumes.herokuapp.com)
+# 💖[Наш сайт](https://bts-resumes.herokuapp.com)💖
 
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
