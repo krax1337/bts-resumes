@@ -36,8 +36,11 @@ def upload(request):
 
     all_vacants_info = [{}]
     vacants_ids = []
-    vacants_ids, cv_summary = handle_uploaded_file(
-        request.FILES['file'], str(request.FILES['file']))
+    try:
+        vacants_ids, cv_summary = handle_uploaded_file(
+            request.FILES['file'], str(request.FILES['file']))
+    except:
+        return render(request, 'formuploads/failed.html', {'error': 'Поддерживаемые форматы: pdf, doc, docx, rtf'})
     request.session['cv_summary'] = cv_summary
     all_vacants_info = analyse_file(all_vacants_info, vacants_ids)
 
@@ -109,7 +112,6 @@ def search_v(request):
     found_job=search(name,search_txt)
     
     
-    print(search_txt)
     return render(request,'formuploads/search.html', {'found_job':found_job, 'check':[job_name,job_region,job_description] , 'name':name})
 
 

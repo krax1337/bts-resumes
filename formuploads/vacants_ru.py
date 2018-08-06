@@ -170,7 +170,7 @@ def get_vacants_ru(l):
             cv_summary[key] = [a for a in cv_summary[key]
                                if not a in stop_words and not a in string.punctuation]
             cv_summary[key] = [ab for ab in cv_summary[key]
-                               if not ab in stop_words_k and not ab in numbers]
+                               if not ab in stop_words and not ab in numbers]
 
         if 'position' in cv_summary:
             key_pos = [x for x in cv_summary["position"] if x != "•"]
@@ -202,7 +202,6 @@ def get_vacants_ru(l):
         counter_l = -1
         while (counter_l < len(l) - 1):
             counter_l += 1
-            print(l[counter_l])
             for key in key_words:
                 for word in key_words[key]:
                     if counter_l < len(l) and word.lower() in l[counter_l].lower():
@@ -235,7 +234,7 @@ def get_vacants_ru(l):
             cv_summary[key] = [a for a in cv_summary[key]
                                if not a in stop_words and not a in string.punctuation]
             cv_summary[key] = [ab for ab in cv_summary[key]
-                               if not ab in stop_words_k and not ab in numbers]
+                               if not ab in stop_words and not ab in numbers]
 
         if 'position' in cv_summary:
             key_pos = [x for x in cv_summary["position"] if x != "•"]

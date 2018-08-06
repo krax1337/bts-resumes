@@ -43,4 +43,3 @@ def search(search_type="job_name",search_text="программист 1с"):
 
     return found_job  
 x=search("job_name", "продовец")
-print(x)
