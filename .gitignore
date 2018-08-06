@@ -4,6 +4,7 @@ myproject/__pycache__
 .idea/
 __pycache__/
 upload/
+all.py
 # Compiled source #
 ###################
 *.com
