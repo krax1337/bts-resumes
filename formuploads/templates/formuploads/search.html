@@ -81,15 +81,17 @@ border-bottom-left-radius:5px;
         </tr>
       </thead>
 
-      {% for vacant in found_job %}
+     
       <tbody>
+          {% for vacant in found_job %}
         <tr>
           {%for key,value in vacant.items%}
           <td>{{ value }}</td>
           {%endfor%}
         </tr>
+        {% endfor %}
       </tbody>
-      {% endfor %}
+     
 
     </table>
   </div>
