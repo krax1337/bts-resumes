@@ -19,8 +19,6 @@ def read_pdf_and_docx(dir_path):
         txt = rtf_to_text(f)
     if len(txt) <= 1:
         f1 = f[:-4]
-        print(f1)
         os.rename(f , f1 + ".rtf")
         txt = rtf_to_text(f1 + ".rtf")
-    print(txt)
     return txt

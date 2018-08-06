@@ -202,7 +202,6 @@ def get_vacants_ru(l):
         counter_l = -1
         while (counter_l < len(l) - 1):
             counter_l += 1
-            print(l[counter_l])
             for key in key_words:
                 for word in key_words[key]:
                     if counter_l < len(l) and word.lower() in l[counter_l].lower():
