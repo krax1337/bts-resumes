@@ -118,6 +118,7 @@ def search_v(request):
 def rate(request):
     if 'cv_summary' in request.session:
         cv = request.session['cv_summary']
+        cv.pop("other")
     cnt = 0
     recommendations = []
     if len(cv['skills']) >= 5:

@@ -29,20 +29,21 @@
 					</form>
 					<br>
 
-					
-					<div class="alert alert-warning" role="alert">
-						{% for value in reccomendations %} 
-							{% if "position" in value %} У вас слишком мало информации в категории: Позиция {% endif %}
-							{% if "education" in value %} У вас слишком мало информации в категории: Образование  {% endif %}
-							{% if "skills" in  value   %}  У вас слишком мало информации в категории: Навыки {% endif %}
-							{% if "experience" in  value   %}У вас слишком мало информации в категории: Опыт работы {% endif %}
-							{% if "language" in value   %}У вас слишком мало информации в категории: Языки {% endif %}
-							{% if "about" in value   %}У вас слишком мало информации в категории: Дополнительная информация {% endif %}
-							{% if "reference" in value   %}У вас слишком мало информации в категории: Рекомендации {% endif %}
+					{% for value in reccomendations %}
+						<div class="alert alert-warning" role="alert">
+							
+								{% if "position" in value %} У вас слишком мало информации в категории: Позиция {% endif %}
+								{% if "education" in value %} У вас слишком мало информации в категории: Образование  {% endif %}
+								{% if "skills" in  value   %}  У вас слишком мало информации в категории: Навыки {% endif %}
+								{% if "experience" in  value   %}У вас слишком мало информации в категории: Опыт работы {% endif %}
+								{% if "language" in value   %}У вас слишком мало информации в категории: Языки {% endif %}
+								{% if "about" in value   %}У вас слишком мало информации в категории: Дополнительная информация {% endif %}
+								{% if "reference" in value   %}У вас слишком мало информации в категории: Рекомендации {% endif %}
 
-							<br> 
-						{% endfor %}
-					</div>
+								<br> 
+							
+						</div>
+					{% endfor %}
 
 				</div>
 			</center>

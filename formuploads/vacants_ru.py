@@ -11,8 +11,11 @@ def stop_words_kk():
 
 
 stop_words = stopwords.words('russian')
-stop_words_k = stop_words_kk()
+stop_words += stop_words_kk()
 for word in stopwords.words('russian'):
+    stop_words.append(word.upper())
+stop_words += stopwords.words('english')
+for word in stopwords.words('english'):
     stop_words.append(word.upper())
 
 
