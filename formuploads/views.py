@@ -120,39 +120,49 @@ def rate(request):
     cnt = 0
     recommendations = []
     if len(cv['skills']) >= 5:
-        cnt += uniform(18,20)
+        cnt += randrange(18,20)
     elif len(cv['skills']) > 0:
-        cnt += 5
+        cnt += 10
+        recommendations.append('skills')
+    else:
         recommendations.append('skills')
     if len(cv['education']) >= 5:
-        cnt += uniform(18,20)
+        cnt += randrange(18,20)
     elif len(cv['education']) > 0:
-        cnt += 5
+        cnt += 10
+        recommendations.append('education')
+    else:
         recommendations.append('education')
     if len(cv['experience']) >= 5:
-        cnt += uniform(18,20)
+        cnt += randrange(18,20)
     elif len(cv['experience']) > 0:
-        cnt += 5    
+        cnt += 10    
+        recommendations.append('experience')
+    else:
         recommendations.append('experience')
     if len(cv['language']) >= 2:
-        cnt += uniform(8,10)
+        cnt += randrange(8,10)
     elif len(cv['language']) > 0:
         cnt += 5
         recommendations.append('language')
+    else:
+        recommendations.append('language')
     if len(cv['position']) >= 5:
-        cnt += uniform(8,10)
+        cnt += randrange(8,10)
     elif len(cv['position']) > 0:
         cnt += 5
         recommendations.append('position')
+    else:
+        recommendations.append('position')
     if len(cv['about']) > 0:
-        cnt += 5
+        cnt += 7
     else:
         recommendations.append('about')
     if len(cv['reference']) > 0:
-        cnt += 5
+        cnt += 8
     else:
         recommendations.append('reference')    
-    cnt += uniform(-3,3)
+    cnt += randrange(-1,1)
     if cnt > 100:
         cnt = 100
     if cnt < 0:
