@@ -19,8 +19,8 @@ from django.conf import settings
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-
-    path('', include('formuploads.urls')),
+    
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'favicon.ico')),
+    path('', include('formuploads.urls')),
 
 ]
