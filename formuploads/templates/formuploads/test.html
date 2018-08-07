@@ -1,3 +1,15 @@
+{% load bootstrap4 %}
+
+<head>
+        <title>Тест по C++</title>
+        {% bootstrap_css %} {% bootstrap_javascript %}
+        <style>
+            #result_txt {
+                width: 50%;
+            }
+        </style>
+
+</head>
 <script type="text/javascript" language="JavaScript">// <![CDATA[
  var res="2313"; 
 function check_me()
@@ -71,7 +83,7 @@ function showhide(obj){
 }
 // ]]>
 </script>
-<center><b>Тест по С++</b></center><br/><br/>
+<center><b>Тест по С++</b></center>
 &nbsp;&nbsp;&nbsp;<span style="color:#006699;text-decoration:underline;cursor:pointer;" onclick="document.getElementById('instruction').style.display = showhide(document.getElementById('instruction').style.display)">
 Инструкция</span>
  <br/>
@@ -107,12 +119,12 @@ function showhide(obj){
 
 <br/></li></ol>      
 <CENTER>
-<P><TEXTAREA name="s1" rows="4" cols="70" readonly> </TEXTAREA> </P>
-<INPUT onclick="check_me()" type="button" value="Показать результат"/>&nbsp;&nbsp;&nbsp;&nbsp; 
-<input type="hidden" name="nok" value={{percentage}}/>
-<INPUT type="reset" value="Сбросить ответы"/> 
-
-
+<P><TEXTAREA class="form-control" name="s1" rows="4" cols="30" id="result_txt" readonly> </TEXTAREA> </P>
+<INPUT class="btn btn-success" onclick="check_me()" type="button" value="Показать результат"/>&nbsp;&nbsp;&nbsp;&nbsp; 
+<INPUT class="btn btn-danger" type="reset" value="Сбросить ответы"/> 
 </CENTER>        
-</form> 
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> 
 <!-- Test created by service http://test.fromgomel.com -->
