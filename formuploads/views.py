@@ -1,4 +1,5 @@
 import json
+import pdfkit
 import os
 import shutil
 import urllib.request
@@ -52,6 +53,7 @@ def upload(request):
 				recommend.append("У вас слишком мало информации в категории: " +
 								 str(key) + " добавьте больше информации")
 		recommend_len = len(recommend)
+	   
 		return render(request, 'formuploads/success.html', {'vacants': all_vacants_info,
 															'cv_summary': cv_summary, 'recommend': recommend, 'recommend_len': recommend_len})
 	return render(request, 'formuploads/failed.html', {'error': 'Невозможно загрузить резюме'})
@@ -114,6 +116,16 @@ def search_v(request):
 	
 	return render(request,'formuploads/search.html', {'found_job':found_job, 'check':[job_name,job_region,job_description] , 'name':name})
 
+# def generate_pdf(request):
+# 	path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
+# 	config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+# 	pdfkit.from_url('http://localhost:8000/resume', "pdf.pdf", configuration=config)
+# 	#pdfkit.from_string('MicroPyramid', 'micro1.pdf', configuration=config)
+
+# 	#pdfkit.from_file('C:/Users/Asus X5555LJ-X01034T/Desktop/resumes_2/formuploads/templates/formuploads/success.html', 'micro2.pdf', configuration=config)
+# 	#pdfkit.from_url('http://bts-resumes.herokuapp.com', 'micro3.pdf', configuration=config)
+
+# 	return render(request,'formuploads/generate_pdf.html')
 
 def rate(request):
     if 'cv_summary' in request.session:

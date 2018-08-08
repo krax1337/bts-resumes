@@ -11,7 +11,12 @@
 			color: #777777;
 			text-align: center
 		}
-
+		
+		#form_btn{
+		margin-top:25px;
+		margin-right: 25px;
+	
+		}
 		table {
 			margin: auto;
 		}
@@ -30,6 +35,19 @@
 </head>
 
 <body>
+		<div align="right">
+
+		<form action="{{ request.build_absolute_uri }}generate_pdf/" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			
+		
+			
+				<input  id= "form_btn"class='btn btn-warning' type="submit" value="Создать резюме" />
+				
+
+		</form>
+		</div>
+
 	<center>
 		<br>
 		<br>
