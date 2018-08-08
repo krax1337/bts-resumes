@@ -116,6 +116,7 @@ def search_v(request):
 
 
 def rate(request):
+<<<<<<< HEAD
 	if 'cv_summary' in request.session:
 		cv = request.session['cv_summary']
 		cv.pop("other")
@@ -185,3 +186,73 @@ def resume(request):
 	resume['skills'] = ['c++','django', 'python']
 	
 	return render(request, 'formuploads/Resume.html', {'resume':resume})
+=======
+    if 'cv_summary' in request.session:
+        cv = request.session['cv_summary']
+        cv.pop("other")
+    cnt = 0
+    recommendations = []
+    if len(cv['skills']) >= 5:
+        cnt += randrange(18,20)
+    elif len(cv['skills']) > 0:
+        cnt += 10
+        recommendations.append('skills')
+    else:
+        recommendations.append('skills')
+    if len(cv['education']) >= 5:
+        cnt += randrange(18,20)
+    elif len(cv['education']) > 0:
+        cnt += 10
+        recommendations.append('education')
+    else:
+        recommendations.append('education')
+    if len(cv['experience']) >= 5:
+        cnt += randrange(18,20)
+    elif len(cv['experience']) > 0:
+        cnt += 10    
+        recommendations.append('experience')
+    else:
+        recommendations.append('experience')
+    if len(cv['language']) >= 2:
+        cnt += randrange(8,10)
+    elif len(cv['language']) > 0:
+        cnt += 5
+        recommendations.append('language')
+    else:
+        recommendations.append('language')
+    if len(cv['position']) >= 5:
+        cnt += randrange(8,10)
+    elif len(cv['position']) > 0:
+        cnt += 5
+        recommendations.append('position')
+    else:
+        recommendations.append('position')
+    if len(cv['about']) > 0:
+        cnt += 7
+    else:
+        recommendations.append('about')
+    if len(cv['reference']) > 0:
+        cnt += 8
+    else:
+        recommendations.append('reference')    
+    cnt += randrange(-1,1)
+    if cnt > 100:
+        cnt = 100
+    if cnt < 0:
+        cnt = 0
+    return render(request, 'formuploads/rate.html',{"percentage": int(cnt), "reccomendations": recommendations})
+
+
+def create_cv(request):
+    resume = {}
+    resume['firstname'] = 'izat'
+    resume['lastname'] = 'khamiyev'
+    resume['phone'] = '87753809115'
+    resume['email'] = 'izat.khamiyev@nu.edu.kz'
+    resume['address'] = 'Astana, Kabanbay Batyr ave. 53'
+    resume['educations'] = [{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}, {'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'},{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
+    resume['experiences'] = [{'company_name': 'NU', 'designation': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
+    resume['positions'] = ['marketing', 'programming', 'management']
+    resume['skills'] = ['c++','django', 'python']
+    return render(request, 'formuploads/Resume.html',{"resume": resume})
+>>>>>>> fa8d53da71a9f185064e91f8582a78e6e38936e1
