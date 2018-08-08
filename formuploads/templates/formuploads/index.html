@@ -11,12 +11,13 @@
 			color: #777777;
 			text-align: center
 		}
-		
-		#form_btn{
-		margin-top:25px;
-		margin-right: 25px;
-	
+
+		#form_btn {
+			margin-top: 25px;
+			margin-right: 25px;
+
 		}
+
 		table {
 			margin: auto;
 		}
@@ -29,24 +30,19 @@
 			box-shadow: none !important;
 		}
 	</style>
-	{% bootstrap_css %} {% bootstrap_javascript %}
+	{% bootstrap_css %} 
+	{% bootstrap_javascript %}
 
 
 </head>
 
 <body>
-		<div align="right">
-
-		<form action="{{ request.build_absolute_uri }}generate_pdf/" method="POST" enctype="multipart/form-data">
-			{% csrf_token %}
-			
-		
-			
-				<input  id= "form_btn"class='btn btn-warning' type="submit" value="Создать резюме" />
-				
-
+	{% csrf_token %}
+	<div align="right">
+		<form action="{{ request.build_absolute_uri }}generate_pdf/" method="GET" enctype="multipart/form-data">
+			<input id="form_btn" class='btn btn-warning' type="submit" value="Создать резюме" />
 		</form>
-		</div>
+	</div>
 
 	<center>
 		<br>
@@ -117,12 +113,12 @@
 
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	  crossorigin="anonymous"></script>
+	    crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-	  crossorigin="anonymous"></script>
+	    crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-	  crossorigin="anonymous"></script>
-	
+	    crossorigin="anonymous"></script>
+
 </body>
 
 </html>

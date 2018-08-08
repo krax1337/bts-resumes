@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 34px;
+    line-height: 30px;
+    font-style: normal;
+    margin-bottom: 10px;
+    text-shadow: 0px 2px 0 #adc1cf;
+}
+
+h2 {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: bold;
+    font-style: normal;
+    color: #525c63;
+    text-shadow: 0px 1px 0 #f6f9fb;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 18px;
+    line-height: 20px;
+    font-style: normal;
+}
+
+p {
+    margin: 3px 0;
+}
+
+a:link,
+a:visited {
+    color: #3c3c3c;
+    text-decoration: none;
+}
+
+a:link:hover,
+a:visited:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+/*------------------------------------
+  Main Styles
+  -----------------------------------*/
+
+#about {
+    background: #c1d5e3;
+    border-top: 5px solid #7e8d97;
+    border-bottom: 5px solid #7e8d97;
+    width: 800px;
+}
+
+#about h1 {
+    text-align: center;
+    padding: 20px 0;
+    margin: 0;
+    color: #373d42;
+    text-shadow: 0 1px 1px #fff, 0 -1px 0 #000;
+}
+
+#contact {
+    float: right;
+    list-style-type: none;
+    width: 280px;
+    float: right;
+}
+
+#contact li {
+    padding: 3px 0;
+    text-align: right;
+}
+
+ul#contact span {
+    text-transform: lowercase;
+    color: #606a71;
+}
+
+#contact li strong {
+    padding-left: 10px;
+    font-style: normal;
+}
+
+.objective {
+    width: 500px;
+    float: left;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-right: 20px;
+    color: #606a71;
+}
+
+.row {
+    margin: 20px 0;
+}
+
+.section {
+    border-bottom: 2px solid #7e8d97;
+    padding: 10px 0;
+}
+
+.item {
+    padding: 5px 0;
+    border-bottom: 1px solid #adc1cf;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.section {
+    display: block;
+    width: 640px;
+    margin-left: 80px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.section .section_header span {
+    display: inline-block;
+    padding: 5px;
+    padding-left: 0px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.4em;
+    text-transform: uppercase;
+}
+
+p.description,
+.skills h4 {
+    color: #606a71;
+}
+
+/*-----------------------------------
+  Clearfix
+  ---------------------------------*/
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}

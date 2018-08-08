@@ -117,8 +117,74 @@ def search_v(request):
 	return render(request,'formuploads/search.html', {'found_job':found_job, 'check':[job_name,job_region,job_description] , 'name':name})
 
 def generate_pdf(request):
-
+	
 	return render(request,'formuploads/generate_pdf.html')
+
+def resume_create(request):
+	resume = {}
+	resume['firstname'] = request.GET.get('firstname')
+	resume['lastname'] = request.GET.get('lastname')
+	resume['phone'] = request.GET.get('phone')
+	resume['email'] = request.GET.get('email')
+	resume['address'] = request.GET.get('address')
+	resume['positions'] = request.GET.get('positions')
+	resume['skills'] = request.GET.get('skills')
+	resume['about'] = request.GET.get('about')
+
+	resume['educations'] = [{}]
+	resume['experiences'] = [{}]
+
+	counter_1 = 0
+	try:
+		counter_1_stp = int(request.GET.get('counter_1'))
+	except:
+		counter_1_stp = 0
+
+	if(counter_1_stp == '0' or None):
+		counter_1_stp = 0
+
+	while True:
+		counter_1 += 1
+		if(counter_1 > counter_1_stp):
+			break
+		resume['educations'].append({
+			'name': request.GET.get('education_name' + str(counter_1)),
+			'degree': request.GET.get('education_degree' + str(counter_1)),
+			'start_date': request.GET.get('education_start_date' + str(counter_1)),
+			'end_date': request.GET.get('education_end_date' + str(counter_1)),
+			'description': request.GET.get('education_description' + str(counter_1)),
+		})
+	resume['educations'].pop(0)
+
+
+
+	counter_2 = 0
+	try:
+		counter_2_stp = int(request.GET.get('counter_2'))
+	except:
+		counter_2_stp = 0
+
+	if(counter_2_stp == '0' or None):
+		counter_2_stp = 0
+
+	while True:
+		counter_2 += 1
+		if(counter_2 > counter_2_stp):
+			break
+		resume['experiences'].append({
+			'name': request.GET.get('experience_name' + str(counter_2)),
+			'degree': request.GET.get('experience_designation' + str(counter_2)),
+			'start_date': request.GET.get('experience_start_date' + str(counter_2)),
+			'end_date': request.GET.get('experience_end_date' + str(counter_2)),
+			'description': request.GET.get('experience_description' + str(counter_2)),
+		})
+	resume['experiences'].pop(0)
+
+
+
+	# resume['languages'] = request.GET.get('about')
+	print(resume)
+	return render(request, 'formuploads/resume_create.html',{'resume': resume})
 
 def extract_pdf(request):
 	# if not os.path.exists('pdf_resumes/'):
@@ -190,16 +256,21 @@ def rate(request):
 
 
 def resume(request):
-	resume = {}
-	resume['firstname'] = 'izat'
-	resume['lastname'] = 'khamiyev'
-	resume['phone'] = '87753809115'
-	resume['email'] = 'izat.khamiyev@nu.edu.kz'
-	resume['address'] = 'Astana, Kabanbay Batyr ave. 53'
-	resume['educations'] = [{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}, {'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'},{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
-	resume['experiences'] = [{'company_name': 'NU', 'designation': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
-	resume['positions'] = ['marketing', 'programming', 'management']
-	resume['skills'] = ['c++','django', 'python']
-	resume['languages'] = [{'name': 'Русский', 'level': 'Изи'}, {'name': 'Казахский', 'level': 'Тяжко'}]
-	resume['about'] = 'asdfoiajdskfalkdsjfakldfmakd fjalksdjfadsfklhhhhhkjfasdhfjkadsfjkashdfask jdfnkjasdnfkasdnfkjasdhfka shdfkalsdfnlkasfndklasdjfklsadhfkjasd fkladsfaskafdl;k;toewpitfmkldmfjkladsjfkladjfioerqoewjfnbmnmsalkqpwokerdsfjadjdfaslkdjfkasldjfalds jfalk dfjalsdjfl;asdjflkasdjfjld'
-	return render(request, 'formuploads/resume.html',{"resume": resume})
+	resume = request.GET.get('resume')
+
+	# resume['firstname'] = 'izat'
+	# resume['lastname'] = 'khamiyev'
+	# resume['phone'] = '87753809115'
+	# resume['email'] = 'izat.khamiyev@nu.edu.kz'
+	# resume['address'] = 'Astana, Kabanbay Batyr ave. 53'
+	# resume['educations'] = [{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}, 
+	# {'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'},
+	# {'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
+	# resume['experiences'] = [{'company_name': 'NU', 'designation': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
+	# resume['positions'] = ['marketing', 'programming', 'management']
+	# resume['skills'] = ['c++','django', 'python']
+	# resume['languages'] = [{'name': 'Русский', 'level': 'Изи'}, {'name': 'Казахский', 'level': 'Тяжко'}]
+	# resume['about'] = 'asdfoiajdskfalkdsjfakldfmakd'
+	print(resume)
+	return render(request, 'formuploads/resume.html',{'resume': resume})
+

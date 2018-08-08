@@ -1,270 +1,59 @@
-
 {% load bootstrap4 %}
-
+{% load static %}
 <html>
-		<head> 
+	
+<head>
+	<link rel="stylesheet" href="{% static 'css/generate_pdf.css' %}"> 
+	{% bootstrap_css %} 
+	{% bootstrap_javascript %}
+	<title>Cоздай свое резюме</title>
+</head>
 
-
-						{% bootstrap_css %} {% bootstrap_javascript %}
-						<style>
-								h1 {
-			font-size: 2em;
-			font-weight: bold;
-			color: #777777;
-			text-align: center
-				}
-				h3{
-						font-size: 1em;
-			
-			color: #777777;
-			text-align: left
-
-				}
-						.form-control{
-								margin-top:10px;
-								margin-bottom: 10px;
-								
-						}
-					 
-						.btn{
-								margin-top:10px;
-						}
-
-						.element_ed
-						{
-							margin-top: 10px;
-							outline: 2px solid #777777;
-							border: 3px solid #fff;
-						}
-						</style>
-		</head>
-		<script
-	src="https://code.jquery.com/jquery-3.3.1.js"
-	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-	crossorigin="anonymous"></script>
 
 <body>
-<h1> Cоздай свое резюме</h1>
+	
+	<h1>Cоздай свое резюме</h1>
 
 	<br>
 	<div class="container">
-	<!--action="{{ request.build_absolute_uri }}pdf/" method="POST" enctype="multipart/form-data"-->
-	<form id="form" onsubmit="return false;" class="row"> {% csrf_token %}
-			         
-
-			
-					<div class="col-4">
-							<h3>Персональная информация</h3>
-				<input id="firstname"  name="firstname" type="text" class="form-control" placeholder="Имя" style="text-align:center">
-						
-					
-					
-				<input id = "lastname" name="lastname" type="text" class="form-control" placeholder="Фамилия" style=" text-align:center">
-					
-				<input id = "phone" name="phone" type="text" class="form-control" placeholder="Телефон" style=" text-align:center">
-					
-					
+		<form action="{{ request.build_absolute_uri }}resume_create/" method="GET" enctype="multipart/form-data" class="row"> 
+			{% csrf_token %}
+			<div class="col-4">
+				<h3>Персональная информация</h3>
+				<input name="firstname" type="text" class="form-control" placeholder="Имя" style="text-align:center">
+				<input name="lastname" type="text" class="form-control" placeholder="Фамилия" style=" text-align:center">
+				<input name="phone" type="text" class="form-control" placeholder="Телефон" style=" text-align:center">
+				<input name="email" type="text" class="form-control" placeholder="Email" style=" text-align:center">
 				<input name="address" type="text" class="form-control" placeholder="Адрес" style=" text-align:center">
-					
 				<input name="positions" type="text" class="form-control" placeholder="Желаемая должность" style=" text-align:center">
 				<input name="skills" type="text" class="form-control" placeholder="Навыки" style=" text-align:center">
-				
 				<textarea name="about" type="text" class="form-control" placeholder="Обо мне" style=" text-align:center"></textarea>
-				<input class='btn btn-primary' type="submit" value="Создать" onclick="othername()" />
-	
+				<input class='btn btn-success' type="submit" value="Создать">
 			</div>
 
-				<div class="col-4" id="educations">
-						<h3>Образование</h3>
-					<button class="btn btn-primary" onclick="new_education()" value="Добавить образование">Добавить образование</button>
-					
-						{% comment %} <div class="element_ed">
-					<input  name="education_name" type="text" class="form-control" placeholder="Название учебного заведения" style=" text-align:center">
-					<input  name="education_degree" type="text" class="form-control" placeholder="Степень" style=" text-align:center">
-					<input  name="education_start_date" type="text" class="form-control" placeholder="Дата начала обучения" style=" text-align:center">
-					<input 	name="education_end_date" type="text" class="form-control" placeholder="Дата конца обучения" style=" text-align:center">
-					<textarea 	name="education_description" type="text" class="form-control" placeholder="Описание" style=" text-align:center"></textarea>
-					</div> {% endcomment %}
-					
-					</div>
-									
-				<div class="col-4" id="experiences">
-					<h3>Опыт работы</h3>
-					<button class="btn btn-primary" onclick="new_experinece()" value="Добавить образование">Добавить опыт работы</button>
+			<div class="col-4" name="educations" id="educations">
+				<h3>Образование</h3>
+				<input id="i_ed" name="counter_1" type="text" value="0" readonly>
+				<button class="btn btn-primary" type="button" onclick="new_education()">Добавить образование</button>
+			</div>
+			
+			<div class="col-4" name="experiences" id="experiences">
+				<h3>Опыт работы</h3>
+				<input id="i_ex" name="counter_2" type="text" value="0" readonly>
+				<button class="btn btn-primary" type="button" onclick="new_experinece()">Добавить опыт работы</button>
+			</div>
+		</form>
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+			crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+			crossorigin="anonymous"></script>
+	<script src="{% static 'js/generate_pdf.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
-					{% comment %} <div class="element_ed">
-							<input  name="experience_name" type="text" class="form-control" placeholder="Название компании" style=" text-align:center">
-							<input  name="experience_designation" type="text" class="form-control" placeholder="Должность" style=" text-align:center">
-							<input  name="experience_start_date" type="text" class="form-control" placeholder="Начало работы" style=" text-align:center">
-							<input 	name="experience_end_date" type="text" class="form-control" placeholder="Конец работы" style=" text-align:center">
-							<textarea 	name="experience_description" type="text" class="form-control" placeholder="Описание" style=" text-align:center"></textarea>
-					</div> {% endcomment %}
-
-												
-				</div>
-								
-
-							
-							
-			</form>
-		</div>
-							 
-										
-										
-						
-
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-	crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-		crossorigin="anonymous"></script>
-		<script>
-				var i_ed=0; 
-				var i_ex=0;
-				function increment_edu(){
-					i_ed +=1;                         /* function for automatic increament of feild's "Name" attribute*/                 
-				}
-				function increment_exp(){
-					i_ex +=1;                         /* function for automatic increament of feild's "Name" attribute*/                 
-				}
-
-				function new_education()
-				{
-				var r=document.createElement('div');
-				r.setAttribute("class", 'element_ed');
-				increment_edu(); 
-				
-				var y = document.createElement("INPUT");
-				y.setAttribute("type", "text");
-				y.setAttribute("placeholder","Название учебного заведения");
-				y.setAttribute("class","form-control");
-				y.setAttribute("style", " text-align:center");
-				y.setAttribute("name", "education_name");
-				y.setAttribute("id",i_ed);
-				
-				var y_2 = document.createElement("INPUT");
-				y_2.setAttribute("type", "text");
-				y_2.setAttribute("placeholder","Степень");
-				y_2.setAttribute("class","form-control");
-				y_2.setAttribute("style"," text-align:center");
-				y_2.setAttribute("name", "education_degree");
-				y_2.setAttribute("id",i_ed);
-
-				var y_3 = document.createElement("INPUT");
-				y_3.setAttribute("type", "text");
-				y_3.setAttribute("placeholder","Дата начала обучения");
-				y_3.setAttribute("class","form-control");
-				y_3.setAttribute("style"," text-align:center");
-				y_3.setAttribute("name", "education_start_date");
-				y_3.setAttribute("id",i_ed);
-
-				var y_4 = document.createElement("INPUT");
-				y_4.setAttribute("type", "text");
-				y_4.setAttribute("placeholder","Дата конца обучения");
-				y_4.setAttribute("class","form-control");
-				y_4.setAttribute("style"," text-align:center");
-				y_4.setAttribute("name", "education_end_date");
-				y_4.setAttribute("id",i_ed);
-
-				var y_5 = document.createElement("TEXTAREA");
-				y_5.setAttribute("type", "text");
-				y_5.setAttribute("placeholder","Описание");
-				y_5.setAttribute("class","form-control");
-				y_5.setAttribute("style"," text-align:center");
-				y_5.setAttribute("name", "education_description");
-				y_5.setAttribute("id",i_ed);
-
-				
-				r.appendChild(y);
-				r.appendChild(y_2);
-				r.appendChild(y_3);
-				r.appendChild(y_4);
-				r.appendChild(y_5);
-
-				document.getElementById("educations").appendChild(r);
-				}
-
-				function new_experinece()
-				{
-				var r=document.createElement('div');
-				r.setAttribute("class", 'element_ed');
-				increment_exp(); 
-				
-				var y = document.createElement("INPUT");
-				y.setAttribute("type", "text");
-				y.setAttribute("placeholder","Название компании");
-				y.setAttribute("class","form-control");
-				y.setAttribute("style", " text-align:center");
-				y.setAttribute("name", "experience_name");
-				y.setAttribute("id",i_ex);
-				
-				var y_2 = document.createElement("INPUT");
-				y_2.setAttribute("type", "text");
-				y_2.setAttribute("placeholder","Должность");
-				y_2.setAttribute("class","form-control");
-				y_2.setAttribute("style"," text-align:center");
-				y_2.setAttribute("name", "experience_designation");
-				y_2.setAttribute("id",i_ex);
-
-				var y_3 = document.createElement("INPUT");
-				y_3.setAttribute("type", "text");
-				y_3.setAttribute("placeholder","Начало работы");
-				y_3.setAttribute("class","form-control");
-				y_3.setAttribute("style"," text-align:center");
-				y_3.setAttribute("name", "experience_start_date");
-				y_3.setAttribute("id",i_ex);
-
-				var y_4 = document.createElement("INPUT");
-				y_4.setAttribute("type", "text");
-				y_4.setAttribute("placeholder","Конец работы");
-				y_4.setAttribute("class","form-control");
-				y_4.setAttribute("style"," text-align:center");
-				y_4.setAttribute("name", "experience_end_date");
-				y_4.setAttribute("id",i_ex);
-
-				var y_5 = document.createElement("TEXTAREA");
-				y_5.setAttribute("type", "text");
-				y_5.setAttribute("placeholder","Описание");
-				y_5.setAttribute("class","form-control");
-				y_5.setAttribute("style"," text-align:center");
-				y_5.setAttribute("name", "experience_description");
-				y_5.setAttribute("id",i_ex);
-
-				
-				r.appendChild(y);
-				r.appendChild(y_2);
-				r.appendChild(y_3);
-				r.appendChild(y_4);
-				r.appendChild(y_5);
-
-				document.getElementById("experiences").appendChild(r);
-				}
-
-		function othername()
-				{
-				var firstname = document.getElementById("firstname").value;
-				var lastname = document.getElementById("lastname").value;
-				
-				resume = {}
-				resume['firstname'] = firstname
-				resume['lastname'] = lastname
-				resume['phone'] = '87753809115'
-				resume['email'] = 'izat.khamiyev@nu.edu.kz'
-				resume['address'] = 'Astana, Kabanbay Batyr ave. 53'
-				resume['educations'] = [{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}, {'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'},{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
-				resume['experiences'] = [{'company_name': 'NU', 'designation': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
-				resume['positions'] = ['marketing', 'programming', 'management']
-				resume['skills'] = ['c++','django', 'python']
-						alert(resume);
-				} </script>
-
-</body> 
-
+</body>
 
 </html>
