@@ -1,1 +1,129 @@
-form for resume
+
+{% load bootstrap4 %}
+
+<html>
+    <head> 
+
+
+            {% bootstrap_css %} {% bootstrap_javascript %}
+            <style>
+                h1 {
+			font-size: 2em;
+			font-weight: bold;
+			color: #777777;
+			text-align: center
+        }
+        h3{
+            font-size: 1em;
+			
+			color: #777777;
+			text-align: left
+
+        }
+            .form-control{
+                margin-top:10px;
+                
+            }
+           
+            .btn{
+                margin-top:10px;
+            }
+            </style>
+    </head>
+
+<body>
+<h1> Cоздай свое резюме</h1>
+
+        <br>
+        <!--action="{{ request.build_absolute_uri }}pdf/" method="POST" enctype="multipart/form-data"-->
+        <form id="form" onsubmit="return false;"> {% csrf_token %}
+            <table><tr> 
+                    <h3>Персональная информация</h3>
+                <td></td>
+                <td> 
+                 <input id="firstname"  name="firstname" type="text" class="form-control" placeholder="Имя" style="text-align:center">
+                </td> 
+                
+                <td>
+                <input id = "lastname" name="lastname" type="text" class="form-control" placeholder="Фамилия" style=" text-align:center">
+                </td>
+</tr>
+            <tr>
+                <td>
+                <input id = "lastname" name="phone" type="text" class="form-control" placeholder="Телефон" style=" text-align:center">
+                </td>
+                
+                <td>    <input name="address" type="text" class="form-control" placeholder="Адрес" style=" text-align:center">
+                </td>
+            </tr>
+                       
+            <tr> <td><div class="input-group">
+                    <input name="educations" type="text" class="form-control" placeholder="Образование" style=" text-align:center">
+                                                     
+                            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                +
+                                        </button>
+                             </div>
+
+                             <div class="collapse" id="collapseExample">
+
+                
+                                <div class="input-group">
+                                <input name="educations" type="text" class="form-control" placeholder="Образование" style=" text-align:center">
+                                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                        +
+                                </button> </div>
+                            
+                            
+                                </div> </td></tr>
+                       <tr> <td> <input name="experiences" type="text" class="form-control" placeholder="Опыт работы" style=" text-align:center">
+                       </td>
+                       <td><input name="positions" type="text" class="form-control" placeholder="Желаемая должность" style=" text-align:center">
+                       </td></tr> <tr> <td> <input name="skills" type="text" class="form-control" placeholder="Навыки" style=" text-align:center">
+                         </td> </tr>
+                    <tr><TD><input name="about" type="text" class="form-control" placeholder="Обо" style=" text-align:center">
+                    </TD></tr>   
+                <tr><TD>	<center>
+							<input class='btn btn-primary' type="submit" value="Создать" onclick="othername()" />
+						</center></TD></tr>
+                    </table>
+                    </form>
+               
+                    
+                    
+            
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+    <script>
+    function othername()
+        {
+        var firstname = document.getElementById("firstname").value;
+        var lastname = document.getElementById("lastname").value;
+        
+        resume = {}
+        resume['firstname'] = firstname
+        resume['lastname'] = lastname
+        resume['phone'] = '87753809115'
+        resume['email'] = 'izat.khamiyev@nu.edu.kz'
+        resume['address'] = 'Astana, Kabanbay Batyr ave. 53'
+        resume['educations'] = [{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}, {'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'},{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
+        resume['experiences'] = [{'company_name': 'NU', 'designation': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
+        resume['positions'] = ['marketing', 'programming', 'management']
+        resume['skills'] = ['c++','django', 'python']
+            alert(resume);
+        } </script>
+
+</body> 
+
+
+</html>
