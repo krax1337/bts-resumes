@@ -176,7 +176,7 @@ def get_vacants_en(l):
 
             "language": ["Languages", "Knowledge of Languages", "Language"],
 
-            "about": ["About me", "Additional information", "Additional information", "Awards","Achievements"],
+            "about": ["About me", "Additional information", "Additional information", "Awards","Achievements", "Accomplishment"],
             "reference": ["Recommendations", "References","Reference", "Referees"],
             "other": ["interests", "hobby"]
         }
