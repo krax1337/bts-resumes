@@ -34,45 +34,6 @@
 		}
 	}
 
-<<<<<<< HEAD
-showResult();
-    }
-}
-
-function pass_result() {
-    var b = document.getElementById('name').value,
-        url = 'formuploads/upload/rate/' + encodeURIComponent(nok);
-
-    document.location.href = url;
-}
-
-function showResult()   {
-    var nok=0;
-    var i,s;
- 
-for (i=0; i<answ.length;i++) {nok+=answ.charAt(i)=="1"?1:0;}
-if(nok==4) s="ОТЛИЧНО";
-if(nok<4) s="ХОРОШО";
-if(nok<3) s="УДОВЛЕТВОРИТЕЛЬНО";
-if (nok<2) s="НЕУДОВЛЕТВОРИТЕЛЬНО";
-    document.test.s1.
-    value="Количество правильных ответов "+nok+". Ваша оценка "+s+". Посмотрите на окно рядом с номером вопроса. Если ответ правильный, там (+). Если ответ ошибочен, там (-).";
-    
-
-with(document.test)
-    {
-    if (answ.charAt(0)=="1") {T1.value=" + "} else {T1.value=" - "};
-   if (answ.charAt(1)=="1") {T2.value=" + "} else {T2.value=" - "};
-   if (answ.charAt(2)=="1") {T3.value=" + "} else {T3.value=" - "};
-   if (answ.charAt(3)=="1") {T4.value=" + "} else {T4.value=" - "};
-     }
-}
-function showhide(obj){
-    if(obj == 'none') return 'inline';
-    else return 'none';
-}
-// ]]>
-=======
 	function control(k, f1, f2, f3, f4) {
 		if (k == 1 && f1.checked) return true;
 		if (k == 2 && f2.checked) return true;
@@ -137,7 +98,6 @@ function showhide(obj){
 		else return 'none';
 	}
 	// ]]>
->>>>>>> 4b2987835f58a48ccb8ab791a4f75b9aada0393c
 </script>
 <center>
 	<b>Тест по С++</b>

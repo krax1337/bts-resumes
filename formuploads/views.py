@@ -114,6 +114,8 @@ def search_v(request):
     
     return render(request,'formuploads/search.html', {'found_job':found_job, 'check':[job_name,job_region,job_description] , 'name':name})
 
+def generate_pdf(request):
+    return render(request,'formuploads/generate_pdf.html')
 
 def rate(request):
     if 'cv_summary' in request.session:
