@@ -172,7 +172,7 @@ def rate(request):
     return render(request, 'formuploads/rate.html',{"percentage": int(cnt), "reccomendations": recommendations})
 
 
-def create_cv(request):
+def resume(request):
     resume = {}
     resume['firstname'] = 'izat'
     resume['lastname'] = 'khamiyev'
