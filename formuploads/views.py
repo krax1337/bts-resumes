@@ -117,9 +117,9 @@ def search_v(request):
 	return render(request,'formuploads/search.html', {'found_job':found_job, 'check':[job_name,job_region,job_description] , 'name':name})
 
 def generate_pdf(request):
-	#path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
-	#config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-	#pdfkit.from_url('http://localhost:8000/resume', "pdf.pdf", configuration=config)
+	path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
+	config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+	pdfkit.from_url('http://localhost:8000/resume', "pdf.pdf", configuration=config)
 	#pdfkit.from_string('MicroPyramid', 'micro1.pdf', configuration=config)
 
 	#pdfkit.from_file('C:/Users/Asus X5555LJ-X01034T/Desktop/resumes_2/formuploads/templates/formuploads/success.html', 'micro2.pdf', configuration=config)
@@ -195,4 +195,6 @@ def resume(request):
 	resume['experiences'] = [{'company_name': 'NU', 'designation': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
 	resume['positions'] = ['marketing', 'programming', 'management']
 	resume['skills'] = ['c++','django', 'python']
+	resume['languages'] = [{'name': 'Русский', 'level': 'Изи'}, {'name': 'Казахский', 'level': 'Тяжко'}]
+	resume['about'] = 'asdfoiajdskfalkdsjfakldfmakd fjalksdjfadsfklhhhhhkjfasdhfjkadsfjkashdfask jdfnkjasdnfkasdnfkjasdhfka shdfkalsdfnlkasfndklasdjfklsadhfkjasd fkladsfaskafdl;k;toewpitfmkldmfjkladsjfkladjfioerqoewjfnbmnmsalkqpwokerdsfjadjdfaslkdjfkasldjfalds jfalk dfjalsdjfl;asdjflkasdjfjld'
 	return render(request, 'formuploads/resume.html',{"resume": resume})
