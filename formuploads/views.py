@@ -117,15 +117,20 @@ def search_v(request):
 	return render(request,'formuploads/search.html', {'found_job':found_job, 'check':[job_name,job_region,job_description] , 'name':name})
 
 def generate_pdf(request):
-	path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
-	config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-	pdfkit.from_url('http://localhost:8000/resume', "pdf.pdf", configuration=config)
-	#pdfkit.from_string('MicroPyramid', 'micro1.pdf', configuration=config)
-
-	#pdfkit.from_file('C:/Users/Asus X5555LJ-X01034T/Desktop/resumes_2/formuploads/templates/formuploads/success.html', 'micro2.pdf', configuration=config)
-	#pdfkit.from_url('http://bts-resumes.herokuapp.com', 'micro3.pdf', configuration=config)
 
 	return render(request,'formuploads/generate_pdf.html')
+
+def extract_pdf(request):
+	# if not os.path.exists('pdf_resumes/'):
+	# 	os.mkdir('pdf_resumes/')
+		
+	
+	# f = open("резюме.pdf","w+")
+	path_wkthmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+	config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+	# pdfkit.from_url("http://google.com", "out.pdf", configuration=config)
+	pdfkit.from_url('http://localhost:8000/resume', "резюме.pdf",configuration=config)
+	# f.write(pdf)
 
 def rate(request):
 	if 'cv_summary' in request.session:
