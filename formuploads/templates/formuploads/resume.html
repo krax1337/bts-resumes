@@ -122,19 +122,20 @@ ul#contact span  {
 }
 
 .section  {
+  display: block;
   width: 640px;
-  margin-left: 150px;
+  margin-left: 80px;
   position: relative;
   margin-bottom: 20px;
 }
 
 .section .section_header span {
-
-
-
   display: inline-block;
   padding: 5px;
+  padding-left: 0px;
   text-align: right;
+  font-weight: bold;
+  font-size: 1.4em;
   text-transform: uppercase;
 }
 
@@ -165,7 +166,6 @@ html[xmlns] .clearfix {
 * html .clearfix {
 	height: 1%;
 }
-
     </style>
   </head>
   <body>
@@ -177,11 +177,6 @@ html[xmlns] .clearfix {
      </div>
      
      <div> 
-        {% if resume.objective %}
-            <div class="objective">
-                <p>{{resume.objective}}</p>
-            </div><!--objective-->
-        {% endif %}
       <ul id="contact">
         {% if resume.phone %}
             <li><span>Mobile</span><strong>{{resume.phone}}</strong></li>
@@ -206,23 +201,23 @@ html[xmlns] .clearfix {
           
         <div class="section">
             <div class="section_header">
-                <span>Desired position</span>
+                <span>Желаемая должность</span>
             </div><!--section-header-->
             <div class="description">
-                <p>{% for pos in resume.positions %}
+                <h3 class="skill_header">{% for pos in resume.positions %}
                     {{pos}}
                     {% endfor %}
-                </p>
+                </h3>
             </div>
         </div><!--section-->
         <div class="section">
             <div class="section_header">
-              <span>Education</span>
+              <span>Образование</span>
             </div><!--section-header-->
             {% for education in resume.educations %}
             <div class="item">
               <h3>{{education.name}}</h3>
-              <h4>{{education.degree}}</h4>
+              <h4><i>{{education.degree}}</i></h4>
               <div class="date">{{education.start_date}} to {{ education.end_date }}</div>
               {% if education.description %}
                 <div class="description">
@@ -235,13 +230,13 @@ html[xmlns] .clearfix {
   
       <div class="section">
         <div class="section_header">
-          <span>Experience</span>
+          <span>Опыт работы</span>
         </div><!--section-header-->
         
       {% for experience in resume.experiences %}
         <div class="item">
           <h3>{{ experience.company_name }}</h3>
-          <h4>{{ experience.designation }}</h4>
+          <h4><i>{{ experience.designation }}</i></h4>
           <div class="date">{{ experience.start_date }} to {{ experience.end_date }}</div>
           <div class="description">
             <p>{{ experience.description }}</p>
@@ -256,7 +251,7 @@ html[xmlns] .clearfix {
       {% if resume.skills %}
         <div class="section skills">
             <div class="section_header">  
-              <span>Skills</span>
+              <span>Навыки</span>
             </div><!--section-header-->
         
            <div class="item">
@@ -268,7 +263,32 @@ html[xmlns] .clearfix {
             </div>
       </div><!--skills-->
       {% endif %}
-    
+      
+      {% if resume.languages %}
+        <div class="section skills">
+            <div class="section_header">  
+              <span>Знание языков</span>
+            </div><!--section-header-->
+            
+            {% for language in resume.languages %}  
+            <div class="description">
+                <p>{{language.name}} - {{language.level}}</p>
+            </div>
+            {% endfor %}
+        </div><!--skills-->
+      {% endif %}
+      
+      {% if resume.about %}
+        <div class="section skills">
+            <div class="section_header">  
+              <span>Дополнительная информация</span>
+            </div><!--section-header-->  
+            <div class="description">
+                <p>{{resume.about}}</p>
+            </div>
+        </div><!--skills-->
+      {% endif %}
+
     </div><!--sidebar-->
     </div><!--container_inner-->
     </div><!--container-->

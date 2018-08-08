@@ -200,4 +200,6 @@ def resume(request):
 	resume['experiences'] = [{'company_name': 'NU', 'designation': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
 	resume['positions'] = ['marketing', 'programming', 'management']
 	resume['skills'] = ['c++','django', 'python']
+	resume['languages'] = [{'name': 'Русский', 'level': 'Изи'}, {'name': 'Казахский', 'level': 'Тяжко'}]
+	resume['about'] = 'asdfoiajdskfalkdsjfakldfmakd fjalksdjfadsfklhhhhhkjfasdhfjkadsfjkashdfask jdfnkjasdnfkasdnfkjasdhfka shdfkalsdfnlkasfndklasdjfklsadhfkjasd fkladsfaskafdl;k;toewpitfmkldmfjkladsjfkladjfioerqoewjfnbmnmsalkqpwokerdsfjadjdfaslkdjfkasldjfalds jfalk dfjalsdjfl;asdjflkasdjfjld'
 	return render(request, 'formuploads/resume.html',{"resume": resume})
