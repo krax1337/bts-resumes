@@ -275,4 +275,3 @@ def resume(request):
 	print(type(resume))
 	print(type(resume_dict))
 	return render(request, 'formuploads/resume.html',{'resume': resume_dict})
-

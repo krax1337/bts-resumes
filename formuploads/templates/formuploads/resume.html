@@ -15,13 +15,13 @@
      <div> 
       <ul id="contact">
         {% if resume.phone %}
-            <li><span>Mobile</span><strong>{{resume.phone}}</strong></li>
+            <li><span>Телефон</span><strong>{{resume.phone}}</strong></li>
         {% endif %}
         {% if resume.email %}
             <li><span>Email</span><strong><a class="email" ></a>{{resume.email}}</a></strong></li>
         {% endif %}
         {% if resume.phone  %}
-            <li><span>Address</span><strong>{{resume.address}}</strong></li>
+            <li><span>Адрес</span><strong>{{resume.address}}</strong></li>
         {% endif %}
       </ul><!--contact-->
       </div>
@@ -34,10 +34,9 @@
                 <span>Желаемая должность</span>
             </div><!--section-header-->
             <div class="description">
-                <h3 class="skill_header">{% for pos in resume.positions %}
-                    {{pos}}
-                    {% endfor %}
-                </h3>
+                <p>
+                    {{resume.positions}}
+                </p>
             </div>
         </div><!--section-->
         {% if resume.educations %}
@@ -87,11 +86,9 @@
           </div><!--section-header-->
       
           <div class="item">
-              <h3 class="skill_header">
-                  {% for skill in resume.skills %}  
-                    {{ skill }}
-                  {% endfor %}
-              </h3>
+              <p>  
+                {{ resume.skills }}
+              </p>
           </div>
         </div><!--skills-->
       {% endif %}
