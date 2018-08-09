@@ -41,23 +41,23 @@
         <br>
         <!--action="{{ request.build_absolute_uri }}pdf/" method="POST" enctype="multipart/form-data"-->
         <form id="form" onsubmit="return false;"> {% csrf_token %}
-            <table><tr> 
-                    <h3>Персональная информация</h3>
-                <td></td>
+            <table>
+            <tr> 
+                <h3>Персональная информация</h3>
+                <td>Персональная информация</td>
                 <td> 
                  <input id="firstname"  name="firstname" type="text" class="form-control" placeholder="Имя" style="text-align:center">
                 </td> 
-                
                 <td>
                 <input id = "lastname" name="lastname" type="text" class="form-control" placeholder="Фамилия" style=" text-align:center">
                 </td>
             </tr>
             <tr>
                 <td>
-                <input id = "lastname" name="phone" type="text" class="form-control" placeholder="Телефон" style=" text-align:center">
+                    <input id = "lastname" name="phone" type="text" class="form-control" placeholder="Телефон" style=" text-align:center">
                 </td>
-                
-                <td>    <input name="address" type="text" class="form-control" placeholder="Адрес" style=" text-align:center">
+                <td>    
+                    <input name="address" type="text" class="form-control" placeholder="Адрес" style=" text-align:center">
                 </td>
             </tr>
                        
