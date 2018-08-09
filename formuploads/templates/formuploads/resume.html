@@ -25,14 +25,8 @@
         {% if resume.phone  %}
             <li><span>Address</span><strong>{{resume.address}}</strong></li>
         {% endif %}
-        <!-- <% unless @resume.website.blank? %>
-          <li><span>Website</span><strong><%= link_to @resume.website, @resume.website %></strong></li>
-        <% endif %> -->
-        
-        
-        
       </ul><!--contact-->
-      </div><!--clearfix-->
+      </div>
     </div><!--wrapper-->
 
       <div id="content">
@@ -48,60 +42,62 @@
                 </h3>
             </div>
         </div><!--section-->
-        <div class="section">
+        {% if resume.educations %}
+          <div class="section">
+              <div class="section_header">
+                <span>Образование</span>
+              </div><!--section-header-->
+              {% for education in resume.educations %}
+              <div class="item">
+                <h3>{{education.name}}</h3>
+                <h4><i>{{education.degree}}</i></h4>
+                <div class="date">{{education.start_date}} to {{ education.end_date }}</div>
+                {% if education.description %}
+                  <div class="description">
+                    <p>{{ education.description }}</p>
+                  </div>
+                {% endif %}
+              </div>
+              {% endfor %}
+          </div><!--section-->
+        {% endif %}
+        {% if resume.experinces %}
+          <div class="section">
             <div class="section_header">
-              <span>Образование</span>
+              <span>Опыт работы</span>
             </div><!--section-header-->
-            {% for education in resume.educations %}
+            
+          {% for experience in resume.experiences %}
             <div class="item">
-              <h3>{{education.name}}</h3>
-              <h4><i>{{education.degree}}</i></h4>
-              <div class="date">{{education.start_date}} to {{ education.end_date }}</div>
-              {% if education.description %}
-                <div class="description">
-                  <p>{{ education.description }}</p>
-                </div>
-              {% endif %}
+              <h3>{{ experience.company_name }}</h3>
+              <h4><i>{{ experience.designation }}</i></h4>
+              <div class="date">{{ experience.start_date }} to {{ experience.end_date }}</div>
+              <div class="description">
+                <p>{{ experience.description }}</p>
+              </div>
             </div>
-            {% endfor %}
-        </div><!--section-->
+          {% endfor %}
+          </div><!--section-->
+        {% endif %}
+      </div><!--content-->
   
-      <div class="section">
-        <div class="section_header">
-          <span>Опыт работы</span>
-        </div><!--section-header-->
-        
-      {% for experience in resume.experiences %}
-        <div class="item">
-          <h3>{{ experience.company_name }}</h3>
-          <h4><i>{{ experience.designation }}</i></h4>
-          <div class="date">{{ experience.start_date }} to {{ experience.end_date }}</div>
-          <div class="description">
-            <p>{{ experience.description }}</p>
-          </div>
-        </div>
-      {% endfor %}
-    </div><!--section-->
-  </div><!--content-->
-  
-  <div class="sidebar">
-     
+    <div class="sidebar">
       {% if resume.skills %}
         <div class="section skills">
-            <div class="section_header">  
-              <span>Навыки</span>
-            </div><!--section-header-->
-        
-           <div class="item">
-                <h3 class="skill_header">
-                    {% for skill in resume.skills %}  
-                     {{ skill }}
-                    {% endfor %}
-                </h3>
-            </div>
-      </div><!--skills-->
-      {% endif %}
+          <div class="section_header">  
+            <span>Навыки</span>
+          </div><!--section-header-->
       
+          <div class="item">
+              <h3 class="skill_header">
+                  {% for skill in resume.skills %}  
+                    {{ skill }}
+                  {% endfor %}
+              </h3>
+          </div>
+        </div><!--skills-->
+      {% endif %}
+    
       {% if resume.languages %}
         <div class="section skills">
             <div class="section_header">  
