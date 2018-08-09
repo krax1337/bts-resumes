@@ -211,14 +211,14 @@ def extract_pdf(request):
 	# render(request,'formuploads/resume.html',{'resume': resume_dict})
 	# f = open("резюме.pdf","w+")
 	# path_wkthmltopdf_amina = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
-	# path_wkthmltopdf_krax = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-	# config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf_krax)
-	resumeUrl = 'http://' + request.get_host() +'/generate_pdf/resume_create/' + "resume" + urlParams
+	path_wkthmltopdf_krax = r'/app/bin/wkhtmltopdf'
+	config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf_krax)
+	resumeUrl = 'https://' + request.get_host() +'/generate_pdf/resume_create/' + "resume" + urlParams
 	print("\n\n\n\n\n" + urlParams + "\n\n\n\n\n\n")
 	if not os.path.exists('download/'):
 		os.mkdir('download/')
 	
-	pdfkit.from_url(resumeUrl, 'download/resume.pdf')
+	pdfkit.from_url(resumeUrl, 'download/resume.pdf',configuration=config)
 	
 	response = HttpResponse(open("download/resume.pdf", 'rb').read())
 	response['Content-Type'] = 'application/pdf'
