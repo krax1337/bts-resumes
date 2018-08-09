@@ -235,7 +235,7 @@ def extract_pdf(request):
 
 	# f.write(pdf)
 	#shutil.rmtree('')
-	return None
+
 
 def download_pdf(request, path):
 	

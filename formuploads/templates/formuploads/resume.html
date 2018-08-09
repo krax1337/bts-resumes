@@ -5,20 +5,28 @@
     <link rel="stylesheet" href="{% static 'css/resume.css' %}">
   </head>
   <body>
+    
     <div id="container">
+      
       <div class="container_inner">
+          
       <div class="wrapper clearfix">
       <div id="about" class="clearfix">
-        <h1>{{resume.firstname}} {{resume.lastname}}</h1>
+        
+        <h1 id="name">{{resume.firstname}} {{resume.lastname}}
+            
+                    <img id="image" src="{% static 'css/0.png' %}" alt="Italian Trulli" align="right" >
+        </h1>
+   
       </div>
      
      <div> 
       <ul id="contact">
         {% if resume.phone %}
-            <li><span>Телефон</span><strong>{{resume.phone}}</strong></li>
+            <li><span><b>Телефон:</b></span><strong>{{resume.phone}}</strong></li>
         {% endif %}
         {% if resume.email %}
-            <li><span>Email</span><strong><a class="email" ></a>{{resume.email}}</a></strong></li>
+            <li><span>Email:</span><strong id="strong"><a class="email" ></a>{{resume.email}}</a></strong></li>
         {% endif %}
         {% if resume.address  %}
             <li><span>Адрес</span><strong>{{resume.address}}</strong></li>
@@ -50,7 +58,9 @@
               <div class="item">
                 <h3>{{education.name}}</h3>
                 <h4><i>{{education.degree}}</i></h4>
+                {%if education.start_date and education.end_date %}
                 <div class="date">{{education.start_date}} to {{ education.end_date }}</div>
+                {%endif%}
                 {% if education.description %}
                   <div class="description">
                     <p>{{ education.description }}</p>
@@ -60,7 +70,7 @@
               {% endfor %}
           </div><!--section-->
         {% endif %}
-        {% if resume.experinces %}
+        {% if resume.experiences %}
           <div class="section">
             <div class="section_header">
               <span>Опыт работы</span>
@@ -68,8 +78,8 @@
             
           {% for experience in resume.experiences %}
             <div class="item">
-              <h3>{{ experience.company_name }}</h3>
-              <h4><i>{{ experience.designation }}</i></h4>
+              <h3>{{ experience.name }}</h3>
+              <h4><i>{{ experience.degree }}</i></h4>
               <div class="date">{{ experience.start_date }} to {{ experience.end_date }}</div>
               <div class="description">
                 <p>{{ experience.description }}</p>

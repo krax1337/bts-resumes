@@ -1,15 +1,21 @@
 body{
-    background-image:url("img.jpg");
+    background-image:url("mg.jpg");
+}
+html{
+    margin-top: 15px;
 }
 
 h1 {
+    margin-top: 15px;
     font-size: 2em;
     font-weight: bold;
     color: #777777;
-    text-align: center;
-    margin-top: 10px;
+    text-align: center
+    
 }
-
+.btn{
+    margin-right:5px;
+}
 h3 {
     font-size: 1em;
     color: #777777;
