@@ -1,8 +1,13 @@
+body{
+    background-image:url("img.jpg");
+}
+
 h1 {
     font-size: 2em;
     font-weight: bold;
     color: #777777;
-    text-align: center
+    text-align: center;
+    margin-top: 10px;
 }
 
 h3 {

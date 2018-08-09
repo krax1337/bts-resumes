@@ -1,6 +1,6 @@
 {% load bootstrap4 %}
 {% load static %}
-<html>
+<html id="html">
 	
 <head>
 	<link rel="stylesheet" href="{% static 'css/generate_pdf.css' %}"> 
@@ -16,39 +16,50 @@
 
 	<br>
 	<div class="container">
-		<form action="{{ request.build_absolute_uri }}resume_create/" method="GET" enctype="multipart/form-data" class="row"> 
+		<form name="form" action="{{ request.build_absolute_uri }}resume_create/" method="GET" enctype="multipart/form-data" onsubmit="return validateForm()"> 
 			{% csrf_token %}
-			<div class="col-4">
-				<h3>Персональная информация</h3>
-				<input name="firstname" type="text" class="form-control" placeholder="Имя" style="text-align:center">
-				<input name="lastname" type="text" class="form-control" placeholder="Фамилия" style=" text-align:center">
-				<input name="phone" type="text" class="form-control" placeholder="Телефон" style=" text-align:center">
+			<div class="col-6">
+                <h3>Персональная информация</h3>
+                <br>
+				<input name="firstname" type="text" class="form-control" placeholder="Имя" style="text-align:center" required>
+				<input name="lastname" type="text" class="form-control" placeholder="Фамилия" style=" text-align:center" required>
+				<input name="phone" type="text" class="form-control" placeholder="Телефон" style=" text-align:center" required>
 				<input name="email" type="text" class="form-control" placeholder="Email" style=" text-align:center">
 				<input name="address" type="text" class="form-control" placeholder="Адрес" style=" text-align:center">
 				<input name="positions" type="text" class="form-control" placeholder="Желаемая должность" style=" text-align:center">
 				<input name="skills" type="text" class="form-control" placeholder="Навыки" style=" text-align:center">
 				<textarea name="about" type="text" class="form-control" placeholder="Обо мне" style=" text-align:center"></textarea>
-				<input class='btn btn-success' type="submit" value="Создать">
+				
 			</div>
 
-			<div class="col-4" name="educations" id="educations">
-                <h3>Образование</h3>
+			<div class="col-6" name="educations" id="educations">
+                <br>
+                <h3 id="ed">Образование</h3>
                 <br>
             
                 
                 
                 <div class="input-group">
-				<input class="form-control width100" id="i_ed" name="counter_1" type="text" value="0"   readonly>
+				<input class="form-control width100" id="i_ed" name="counter_1" type="hidden" value="0"   readonly>
                
-                <button class="btn btn-primary" type="button" onclick="new_education()">+</button></div>
-               </div>
+                <button class="btn btn-primary" type="button" onclick="new_education()">+ Добавить образование</button>
+                <button class="btn btn-danger" type="button" onclick="removeElement_edu()">- </button>
+            </div></div>
 			
-			<div class="col-4" name="experiences" id="experiences">
+		    	<div class="col-6" name="experiences" id="experiences">
+                    <br>
                 <h3>Опыт работы</h3>
                 <br>
-				<input class="form-control"  id="i_ex" name="counter_2" type="text" value="0" style="width: 56%;"  readonly>
-                <button class="btn btn-primary" type="button" onclick="new_experinece()">Добавить опыт работы</button>
-		</div>
+                <div class="input-group">
+				<input class="form-control"  id="i_ex" name="counter_2" type="hidden" value="0" style="width: 56%;"  readonly>
+                <button  class="btn btn-primary" type="button" onclick="new_experinece()">+ Добавить опыт работы</button>
+                <button class="btn btn-danger" type="button" onclick="removeElement_exp()">- </button>
+            
+            </div></div>
+        <br>
+        
+        <input class='btn btn-success' type="submit" value="Создать"></div>
+        
 		</form>
 	</div>
 	

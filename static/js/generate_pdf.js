@@ -8,9 +8,12 @@ function increment_edu() {
 function increment_exp() {
     i_ex += 1; /* function for automatic increament of feild's "Name" attribute*/
 }
-
+var edu=1;
 function new_education() {
     var r = document.createElement('div');
+    
+    r.setAttribute("id", 'edu'+edu);
+    edu=+1;
     r.setAttribute("class", 'element_ed');
     increment_edu();
 
@@ -21,6 +24,7 @@ function new_education() {
     y.setAttribute("style", " text-align:center");
     y.setAttribute("name", "education_name" + i_ed);
     y.setAttribute("id", i_ed);
+    y.required = true;
     
 
     var y_2 = document.createElement("INPUT");
@@ -65,9 +69,12 @@ function new_education() {
     document.getElementById("i_ed").value = i_ed;
     document.getElementById("educations").appendChild(r);
 }
-
+var exp=1;
 function new_experinece() {
     var r = document.createElement('div');
+    
+    r.setAttribute("id", 'exp'+exp);
+    exp=+1; 
     r.setAttribute("class", 'element_ed');
     increment_exp();
 
@@ -78,6 +85,8 @@ function new_experinece() {
     y.setAttribute("style", " text-align:center");
     y.setAttribute("name", "experience_name" + i_ex);
     y.setAttribute("id", i_ex);
+    y.required = true;
+    
 
     var y_2 = document.createElement("INPUT");
     y_2.setAttribute("type", "text");
@@ -120,6 +129,14 @@ function new_experinece() {
 
     document.getElementById("i_ex").value = i_ex;
     document.getElementById("experiences").appendChild(r);
+}
+function removeElement_edu() {
+    document.getElementById("edu"+edu).outerHTML = "";
+    edu=-1; 
+}
+function removeElement_exp() {
+    document.getElementById("exp"+exp).outerHTML = "";
+    exp=-1; 
 }
 
 // function othername() {
