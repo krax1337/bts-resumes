@@ -126,6 +126,7 @@ def generate_pdf(request):
 	return render(request,'formuploads/generate_pdf.html')
 
 def resume_create(request):
+	
 	resume = {}
 	resume['firstname'] = request.GET.get('firstname')
 	resume['lastname'] = request.GET.get('lastname')
@@ -187,7 +188,11 @@ def resume_create(request):
 
 
 	# resume['languages'] = request.GET.get('about')
-	print(resume)
+	# print(resume)
+	# path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
+	# config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+	
+	# pdfkit.from_url('http://localhost:8000/generate_pdf/resume_create/resume/', "download/резюме.pdf",configuration=config)
 	return render(request, 'formuploads/resume_create.html',{'resume': resume})
 
 def extract_pdf(request):
@@ -196,12 +201,10 @@ def extract_pdf(request):
 		
 	
 	# f = open("резюме.pdf","w+")
-	path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
-	config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
 	
-	pdfkit.from_url('http://localhost:8000/generate_pdf/resume_create/resume/', "download/резюме.pdf",configuration=config)
 	# f.write(pdf)
 	#shutil.rmtree('')
+	return None
 
 def download_pdf(request, path):
     file_path = os.path.join(settings.MEDIA_ROOT, path)

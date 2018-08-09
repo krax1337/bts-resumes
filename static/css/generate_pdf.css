@@ -1,3 +1,7 @@
+body{
+    background-image:url("img.jpg");
+}
+
 h1 {
     font-size: 2em;
     font-weight: bold;
