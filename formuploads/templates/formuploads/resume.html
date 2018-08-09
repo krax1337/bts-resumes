@@ -28,25 +28,27 @@
         {% if resume.email %}
             <li><span>Email:</span><strong id="strong"><a class="email" ></a>{{resume.email}}</a></strong></li>
         {% endif %}
-        {% if resume.phone  %}
-            <li><span>Адрес:</span><strong>{{resume.address}}</strong></li>
+        {% if resume.address  %}
+            <li><span>Адрес</span><strong>{{resume.address}}</strong></li>
         {% endif %}
       </ul><!--contact-->
       </div>
     </div><!--wrapper-->
 
       <div id="content">
-          
-        <div class="section">
-            <div class="section_header">
-                <span>Желаемая должность</span>
-            </div><!--section-header-->
-            <div class="description">
-                <p>
-                    {{resume.positions}}
-                </p>
-            </div>
-        </div><!--section-->
+         
+        {% if resume.positions %}
+          <div class="section">
+              <div class="section_header">
+                  <span>Желаемая должность</span>
+              </div><!--section-header-->
+              <div class="description">
+                  <p>
+                      {{resume.positions}}
+                  </p>
+              </div>
+          </div><!--section-->
+        {% endif %}  
         {% if resume.educations %}
           <div class="section">
               <div class="section_header">
