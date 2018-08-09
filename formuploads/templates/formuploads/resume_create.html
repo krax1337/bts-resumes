@@ -18,18 +18,25 @@
   </style>
   </head>
   <body>
-      <center>
-    <form id= "btn" action="resume/" method="GET" enctype="multipart/form-data">
-      {% csrf_token %}
-      <input name="resume" value="{{resume}}" type="hidden">
-      <input class='btn btn-outline-warning' type="submit" value="Посмотреть резюме">
-    </form>
+      
+    <center>
+      <form id= "btn" action="resume/" method="GET" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input name="resume" value="{{resume}}" type="hidden">
+        <input class='btn btn-outline-warning' type="submit" value="Посмотреть резюме">
+      </form>
+      
+      <form id= "btn" action="extract_pdf/" method="GET" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input name="resume" value="{{resume}}" type="hidden">
+        <input class='btn btn-outline-warning' type="submit" value="Скачать резюме">
+      </form>
+    </center>
     
-    <form id= "btn" action="{{ request.build_absolute_uri }}extract_pdf/" method="GET" enctype="multipart/form-data">
-      <input class='btn btn-outline-warning' type="submit" value="Скачать резюме">
-    </form></center>
-    <a href="/download/резюме.pdf" download>Download</a>
-    <input type="button" value="Download" onclick="window.open('download_my_pdf')">
+    
+    
+    <!-- <a href="/download/резюме.pdf" download>Download</a>
+    <input type="button" value="Download" onclick="window.open('download_my_pdf')"> -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
