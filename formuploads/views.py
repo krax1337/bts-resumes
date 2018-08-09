@@ -3,6 +3,7 @@ import pdfkit
 import os
 import shutil
 import urllib.request
+import ast
 from django.conf import settings
 from xml.etree import ElementTree as ET
 from wsgiref.util import FileWrapper
@@ -269,20 +270,9 @@ def rate(request):
 
 def resume(request):
 	resume = request.GET.get('resume')
-
-	# resume['firstname'] = 'izat'
-	# resume['lastname'] = 'khamiyev'
-	# resume['phone'] = '87753809115'
-	# resume['email'] = 'izat.khamiyev@nu.edu.kz'
-	# resume['address'] = 'Astana, Kabanbay Batyr ave. 53'
-	# resume['educations'] = [{'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}, 
-	# {'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'},
-	# {'name': 'NU', 'degree': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
-	# resume['experiences'] = [{'company_name': 'NU', 'designation': 'Masters', 'start_date': '10.10.2015', 'end_date': '10.10.2017', 'description': 'adsfafd'}]
-	# resume['positions'] = ['marketing', 'programming', 'management']
-	# resume['skills'] = ['c++','django', 'python']
-	# resume['languages'] = [{'name': 'Русский', 'level': 'Изи'}, {'name': 'Казахский', 'level': 'Тяжко'}]
-	# resume['about'] = 'asdfoiajdskfalkdsjfakldfmakd'
+	resume_dict = ast.literal_eval(resume)
 	print(resume)
-	return render(request, 'formuploads/resume.html',{'resume': resume})
+	print(type(resume))
+	print(type(resume_dict))
+	return render(request, 'formuploads/resume.html',{'resume': resume_dict})
 
