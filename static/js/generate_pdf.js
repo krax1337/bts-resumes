@@ -21,6 +21,7 @@ function new_education() {
     y.setAttribute("style", " text-align:center");
     y.setAttribute("name", "education_name" + i_ed);
     y.setAttribute("id", i_ed);
+    
 
     var y_2 = document.createElement("INPUT");
     y_2.setAttribute("type", "text");

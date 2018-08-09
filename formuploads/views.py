@@ -3,10 +3,14 @@ import pdfkit
 import os
 import shutil
 import urllib.request
+from django.conf import settings
 from xml.etree import ElementTree as ET
+from wsgiref.util import FileWrapper
 
 from dicttoxml import dicttoxml
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
+from django.http import Http404
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
@@ -130,7 +134,6 @@ def resume_create(request):
 	resume['positions'] = request.GET.get('positions')
 	resume['skills'] = request.GET.get('skills')
 	resume['about'] = request.GET.get('about')
-
 	resume['educations'] = [{}]
 	resume['experiences'] = [{}]
 
@@ -192,12 +195,21 @@ def extract_pdf(request):
 		
 	
 	# f = open("резюме.pdf","w+")
-	path_wkthmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+	path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
 	config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-	# pdfkit.from_url("http://google.com", "out.pdf", configuration=config)
-	pdfkit.from_url('http://localhost:8000/resume', "резюме.pdf",configuration=config)
+	
+	pdfkit.from_url('http://localhost:8000/generate_pdf/resume_create/resume/', "download/резюме.pdf",configuration=config)
 	# f.write(pdf)
+	#shutil.rmtree('')
 
+def download_pdf(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/pdf")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
 def rate(request):
 	if 'cv_summary' in request.session:
 		cv = request.session['cv_summary']

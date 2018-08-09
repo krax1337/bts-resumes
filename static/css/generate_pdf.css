@@ -21,7 +21,10 @@ h3 {
 }
 
 .element_ed {
-    margin-top: 10px;
-    outline: 2px solid #777777;
-    border: 3px solid #fff;
+    margin-top: 20px;
+    
 }
+#i_ed{
+    margin-right: 10px;
+}
+
