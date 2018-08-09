@@ -69,7 +69,7 @@ def test(request):
 		cv = request.session['cv_summary']
 	for k in cv:
 		for v in cv[k]:
-			if "C++" in v or "c++" in v:
+			if "C++" in v or "c++" in v or "с++" in v or "С++" in v:
 				return render(request, 'formuploads/test.html')
 	return render(request, 'formuploads/failed.html', {'error': 'Нет подходящего теста для вас'})
 
@@ -198,22 +198,54 @@ def resume_create(request):
 def extract_pdf(request):
 	# if not os.path.exists('pdf_resumes/'):
 	# 	os.mkdir('pdf_resumes/')
-		
-	
+	# print(request)
+	urls = {
+        'ABSOLUTE_ROOT': request.build_absolute_uri('/')[:-1].strip("/"),
+        'ABSOLUTE_ROOT_URL': request.build_absolute_uri('/').strip("/"),
+    }
+	# print(urls)
+	# print(request.GET)
+	# print(request.get_full_path())
+	urlParams = request.get_full_path()
+	urlParams = urlParams[40:]
+	# resume = request.GET.get('resume')
+	# resume_dict = ast.literal_eval(resume)
+	# print("HELOOOOOOOOOOOOOOOOOOOOOOO")
+	# print(resume_dict)
+	# print(type(resume_dict))
+	# render(request,'formuploads/resume.html',{'resume': resume_dict})
 	# f = open("резюме.pdf","w+")
+	# path_wkthmltopdf_amina = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
+	# path_wkthmltopdf_krax = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+	# config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf_krax)
+	resumeUrl = 'http://' + request.get_host() +'/generate_pdf/resume_create/' + "resume" + urlParams
+	print("\n\n\n\n\n" + urlParams + "\n\n\n\n\n\n")
+	if not os.path.exists('download/'):
+		os.mkdir('download/')
 	
+	pdfkit.from_url(resumeUrl, 'download/resume.pdf')
+	
+	response = HttpResponse(open("download/resume.pdf", 'rb').read())
+	response['Content-Type'] = 'application/pdf'
+	response['Content-Disposition'] = 'attachment; filename=resume.pdf'
+	if os.path.exists('upload/'):
+		shutil.rmtree('upload/')
+	return response
+
+
 	# f.write(pdf)
 	#shutil.rmtree('')
 	return None
 
 def download_pdf(request, path):
-    file_path = os.path.join(settings.MEDIA_ROOT, path)
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/pdf")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            return response
-    raise Http404
+	
+	file_path = os.path.join(settings.MEDIA_ROOT, path)
+	if os.path.exists(file_path):
+		with open(file_path, 'rb') as fh:
+			response = HttpResponse(fh.read(), content_type="application/pdf")
+			response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+			return response
+	raise Http404
 def rate(request):
 	if 'cv_summary' in request.session:
 		cv = request.session['cv_summary']
@@ -278,4 +310,10 @@ def resume(request):
 	print(type(resume))
 	print(type(resume_dict))
 	return render(request, 'formuploads/resume.html',{'resume': resume_dict})
+
+def resume_download(request,resume_dict):
+
+	print(resume_dict)
+	return render(request,'formuploads/resume.html',{'resume': resume_dict})
+
 
