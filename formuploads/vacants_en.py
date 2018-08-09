@@ -10,8 +10,13 @@ for word in stopwords.words('english'):
 numbers = ['(', ')','–', '—', ';', ':', '[', ']', ',', '»', '«', 'January', 'February', 'March', 'April', 'May', 'June', 'July',
            'August', 'September', 'October', 'November', 'December', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'year', 'month', 'months', 'of', 'p',
            '/p', 'lt', 'li', '/li', 'gt', '/ul', 'amp', 'nbsp', 'ul', '/strong']
+for i in range(1950, 2040):
+    numbers.append(str(i))
 
 
+for i in range(10, 100):
+    numbers.append(str(i))
+    
 def get_vacants_en(l):
     head_hunter = False
     for line in l:

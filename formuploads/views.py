@@ -69,7 +69,7 @@ def test(request):
 		cv = request.session['cv_summary']
 	for k in cv:
 		for v in cv[k]:
-			if "C++" in v or "c++" in v:
+			if "C++" in v or "c++" in v or "с++" in v or "С++" in v:
 				return render(request, 'formuploads/test.html')
 	return render(request, 'formuploads/failed.html', {'error': 'Нет подходящего теста для вас'})
 

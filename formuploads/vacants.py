@@ -73,10 +73,9 @@ def get_vacants(fname, pages=None):
     cnt_ru = 0
     for line in l:
         try:
-
-            if detect(line) == 'en':
+            if detect(line.lower()) == 'en':
                 cnt_en += 1
-            if detect(line) == 'ru':
+            if detect(line.lower()) == 'ru':
                 cnt_ru += 1
         except:
             continue
