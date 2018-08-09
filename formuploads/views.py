@@ -178,7 +178,7 @@ def resume_create(request):
 			break
 		resume['experiences'].append({
 			'name': request.GET.get('experience_name' + str(counter_2)),
-			'degree': request.GET.get('experience_designation' + str(counter_2)),
+			'designation': request.GET.get('experience_designation' + str(counter_2)),
 			'start_date': request.GET.get('experience_start_date' + str(counter_2)),
 			'end_date': request.GET.get('experience_end_date' + str(counter_2)),
 			'description': request.GET.get('experience_description' + str(counter_2)),

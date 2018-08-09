@@ -8,12 +8,23 @@ function increment_edu() {
 function increment_exp() {
     i_ex += 1; /* function for automatic increament of feild's "Name" attribute*/
 }
-var edu=1;
+
+function dec_edu() {
+    i_ed -= 1; /* function for automatic increament of feild's "Name" attribute*/
+}
+
+function dec_exp() {
+    i_ex -= 1; /* function for automatic increament of feild's "Name" attribute*/
+}
+
+var edu = 0;
+var exp = 0;
+
 function new_education() {
     var r = document.createElement('div');
-    
-    r.setAttribute("id", 'edu'+edu);
-    edu=+1;
+    edu += 1;
+    r.setAttribute("id", 'edu' + edu);
+
     r.setAttribute("class", 'element_ed');
     increment_edu();
 
@@ -25,7 +36,7 @@ function new_education() {
     y.setAttribute("name", "education_name" + i_ed);
     y.setAttribute("id", i_ed);
     y.required = true;
-    
+
 
     var y_2 = document.createElement("INPUT");
     y_2.setAttribute("type", "text");
@@ -69,12 +80,13 @@ function new_education() {
     document.getElementById("i_ed").value = i_ed;
     document.getElementById("educations").appendChild(r);
 }
-var exp=1;
+
+
 function new_experinece() {
     var r = document.createElement('div');
-    
-    r.setAttribute("id", 'exp'+exp);
-    exp=+1; 
+    exp += 1;
+    r.setAttribute("id", 'exp' + exp);
+
     r.setAttribute("class", 'element_ed');
     increment_exp();
 
@@ -86,7 +98,7 @@ function new_experinece() {
     y.setAttribute("name", "experience_name" + i_ex);
     y.setAttribute("id", i_ex);
     y.required = true;
-    
+
 
     var y_2 = document.createElement("INPUT");
     y_2.setAttribute("type", "text");
@@ -130,52 +142,19 @@ function new_experinece() {
     document.getElementById("i_ex").value = i_ex;
     document.getElementById("experiences").appendChild(r);
 }
+
 function removeElement_edu() {
-    document.getElementById("edu"+edu).outerHTML = "";
-    edu=-1; 
+    document.getElementById("i_ed").value = i_ed - 1;
+    i_ed -= 1;
+    elem = document.getElementById("edu" + edu);
+    elem.remove();
+    edu -= 1;
 }
+
 function removeElement_exp() {
-    document.getElementById("exp"+exp).outerHTML = "";
-    exp=-1; 
+    document.getElementById("i_ex").value = i_ex - 1;
+    i_ex -= 1;
+    elem = document.getElementById("exp" + exp);
+    elem.remove();
+    exp -= 1;
 }
-
-// function othername() {
-//     var firstname = document.getElementById("firstname").value;
-//     var lastname = document.getElementById("lastname").value;
-
-//     resume = {}
-//     resume['firstname'] = firstname
-//     resume['lastname'] = lastname
-//     resume['phone'] = '87753809115'
-//     resume['email'] = 'izat.khamiyev@nu.edu.kz'
-//     resume['address'] = 'Astana, Kabanbay Batyr ave. 53'
-//     resume['educations'] = [{
-//         'name': 'NU',
-//         'degree': 'Masters',
-//         'start_date': '10.10.2015',
-//         'end_date': '10.10.2017',
-//         'description': 'adsfafd'
-//     }, {
-//         'name': 'NU',
-//         'degree': 'Masters',
-//         'start_date': '10.10.2015',
-//         'end_date': '10.10.2017',
-//         'description': 'adsfafd'
-//     }, {
-//         'name': 'NU',
-//         'degree': 'Masters',
-//         'start_date': '10.10.2015',
-//         'end_date': '10.10.2017',
-//         'description': 'adsfafd'
-//     }]
-//     resume['experiences'] = [{
-//         'company_name': 'NU',
-//         'designation': 'Masters',
-//         'start_date': '10.10.2015',
-//         'end_date': '10.10.2017',
-//         'description': 'adsfafd'
-//     }]
-//     resume['positions'] = ['marketing', 'programming', 'management']
-//     resume['skills'] = ['c++', 'django', 'python']
-//     alert(resume);
-// }
