@@ -6,21 +6,35 @@
 	<link rel="stylesheet" href="{% static 'css/generate_pdf.css' %}"> 
 	{% bootstrap_css %} 
 	{% bootstrap_javascript %}
-	<title>Cоздай свое резюме</title>
+	<div>
+		<center>
+	<title >Cоздай свое резюме</title></center>
+	
+</div>
 </head>
 
 
 <body>
-	
-	<h1>Cоздай свое резюме</h1>
+    <center>
+		<div class="input-group">
+			
+			<div style="margin-left:20px;">
+				<form id= "btn_main" action="/" method="GET" enctype="multipart/form-data" style='float: left; '>
+				<input class='btn btn-info' type="submit" value="На главную">
+				</form>
+			</div>
+			<h1 style="margin-left: 350px;">Cоздай свое резюме</h1>
+		</div>
 
 	<br>
+	
+
 	<div class="container">
 		<form name="form" action="{{ request.build_absolute_uri }}resume_create/" method="GET" enctype="multipart/form-data" onsubmit="return validateForm()"> 
 			{% csrf_token %}
 			<div class="col-6">
-                <h3>Персональная информация</h3>
-                <br>
+				<h3>Персональная информация</h3>
+				<br>
 				<input name="firstname" type="text" class="form-control" placeholder="Имя" style="text-align:center" required>
 				<input name="lastname" type="text" class="form-control" placeholder="Фамилия" style=" text-align:center" required>
 				<input name="phone" type="text" class="form-control" placeholder="Телефон" style=" text-align:center" required>
@@ -33,32 +47,34 @@
 			</div>
 
 			<div class="col-6" name="educations" id="educations">
-                <br>
-                <h3 id="ed">Образование</h3>
-                <br>
-            
-                
-                
-                <div class="input-group">
-				<input class="form-control width100" id="i_ed" name="counter_1" type="hidden" value="0"   readonly>
-               
-                <button class="btn btn-primary" type="button" onclick="new_education()">+ Добавить образование</button>
-                <button class="btn btn-outline-danger" type="button" onclick="removeElement_edu()">- </button>
-            </div></div>
+				<br>
+				<h3 id="ed">Образование</h3>
+				<br>
+		
+				<div class="input-group">
+					<input class="form-control" id="i_ed" name="counter_1" type="hidden" value="0">
+						
+					<button class="btn btn-primary" type="button" onclick="new_education()">+ Добавить образование</button>
+					<button class="btn btn-danger" type="button" onclick="removeElement_edu()">- </button>
+						
+				</div>
+			</div>
 			
-		    	<div class="col-6" name="experiences" id="experiences">
-                    <br>
-                <h3>Опыт работы</h3>
-                <br>
-                <div class="input-group">
-				<input class="form-control"  id="i_ex" name="counter_2" type="hidden" value="0" style="width: 56%;"  readonly>
-                <button  class="btn btn-primary" type="button" onclick="new_experinece()">+ Добавить опыт работы</button>
-                <button class="btn btn-danger" type="button" onclick="removeElement_exp()">- </button>
-            
-            </div></div>
+		  <div class="col-6" name="experiences" id="experiences">
         <br>
+				<h3>Опыт работы</h3>
+				<br>
+        <div class="input-group">
+					<input class="form-control"  id="i_ex" name="counter_2" type="hidden" value="0">
+					
+					<button class="btn btn-primary" type="button" onclick="new_experinece()">+ Добавить опыт работы</button>
+          <button class="btn btn-danger" type="button" onclick="removeElement_exp()">- </button>
+            
+				</div>
+			</div>
+      <br>
         
-        <input class='btn btn-success' type="submit" value="Создать"></div>
+      <input class='btn btn-success' type="submit" value="Создать"></div>
         
 		</form>
 	</div>
@@ -71,7 +87,7 @@
 			crossorigin="anonymous"></script>
 	<script src="{% static 'js/generate_pdf.js' %}"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
+</center>
 </body>
 
 </html>

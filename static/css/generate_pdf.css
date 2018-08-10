@@ -1,6 +1,11 @@
 
 html{
+
     margin-top: 15px;
+    
+}
+#btn_main{
+   margin-left: 10px;
 }
 
 h1 {
@@ -11,6 +16,7 @@ h1 {
     text-align: center
     
 }
+
 .btn{
     margin-right:5px;
 }

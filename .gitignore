@@ -6,6 +6,7 @@ __pycache__/
 upload/
 download/
 all.py
+staticfiles/
 # Compiled source #
 ###################
 *.com
