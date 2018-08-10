@@ -23,14 +23,20 @@
       <form id= "btn" action="resume/" method="GET" enctype="multipart/form-data">
         {% csrf_token %}
         <input name="resume" value="{{resume}}" type="hidden">
-        <input class='btn btn-outline-warning' type="submit" value="Посмотреть резюме">
+        <input class='btn btn-success' type="submit" value="Посмотреть резюме">
       </form>
       
       <form id= "btn" action="extract_pdf/" method="GET" enctype="multipart/form-data">
         {% csrf_token %}
         <input name="resume" value="{{resume}}" type="hidden">
-        <input class='btn btn-outline-warning' type="submit" value="Скачать резюме">
+        <input class='btn btn-warning' type="submit" value="Скачать резюме" style="width: 13%;">  
       </form>
+      <div >
+          <form id= "btn_main" action="/" method="GET" enctype="multipart/form-data" >
+               
+                <input class='btn btn-warning' type="submit" value="На главную"  style="width: 13%;">
+            </form></div>
+
     </center>
     
     

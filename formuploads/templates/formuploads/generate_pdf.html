@@ -6,15 +6,25 @@
 	<link rel="stylesheet" href="{% static 'css/generate_pdf.css' %}"> 
 	{% bootstrap_css %} 
 	{% bootstrap_javascript %}
-	<title>Cоздай свое резюме</title>
+	<div>
+		<center>
+	<title >Cоздай свое резюме</title></center>
+	<div style="margin-left:10px;">
+	<form id= "btn_main" action="/" method="GET" enctype="multipart/form-data" style='float: left; '>
+       
+        <input class='btn btn-outline-warning' type="submit" value="На главную">
+    </form></div>
+</div>
 </head>
 
 
 <body>
-	
+        <center>
 	<h1>Cоздай свое резюме</h1>
 
 	<br>
+	
+
 	<div class="container">
 		<form name="form" action="{{ request.build_absolute_uri }}resume_create/" method="GET" enctype="multipart/form-data" onsubmit="return validateForm()"> 
 			{% csrf_token %}
@@ -43,7 +53,7 @@
 				<input class="form-control width100" id="i_ed" name="counter_1" type="hidden" value="0"   readonly>
                
                 <button class="btn btn-primary" type="button" onclick="new_education()">+ Добавить образование</button>
-                <button class="btn btn-outline-danger" type="button" onclick="removeElement_edu()">- </button>
+                <button class="btn btn-danger" type="button" onclick="removeElement_edu()">- </button>
             </div></div>
 			
 		    	<div class="col-6" name="experiences" id="experiences">
@@ -71,7 +81,7 @@
 			crossorigin="anonymous"></script>
 	<script src="{% static 'js/generate_pdf.js' %}"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
+</center>
 </body>
 
 </html>

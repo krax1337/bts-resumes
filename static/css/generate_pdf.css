@@ -1,8 +1,10 @@
+
 body{
-    background-image:url("mg.jpg");
-}
-html{
     margin-top: 15px;
+    
+}
+#btn_main{
+   margin-left: 10px;
 }
 
 h1 {
@@ -12,6 +14,11 @@ h1 {
     color: #777777;
     text-align: center
     
+}
+#image{
+   margin:0;
+    height: 600px;
+    width: 50%;
 }
 .btn{
     margin-right:5px;

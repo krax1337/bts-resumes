@@ -15,7 +15,7 @@
         
         <h1 id="name">{{resume.firstname}} {{resume.lastname}}
             
-                    <img id="image" src="{% static 'css/0.png' %}" alt="Italian Trulli" align="right" >
+        <img id="image" src="{% static 'css/0.png' %}" alt="Italian Trulli" align="right" >
         </h1>
    
       </div>
@@ -79,8 +79,10 @@
           {% for experience in resume.experiences %}
             <div class="item">
               <h3>{{ experience.name }}</h3>
-              <h4><i>{{ experience.degree }}</i></h4>
+              <h4><i>{{ experience.designation }}</i></h4>
+              {%if experience.start_date and experience.end_date %}
               <div class="date">{{ experience.start_date }} to {{ experience.end_date }}</div>
+              {%endif%}
               <div class="description">
                 <p>{{ experience.description }}</p>
               </div>
