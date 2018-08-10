@@ -278,14 +278,8 @@ def rate(request):
 def resume(request):
 	resume = request.GET.get('resume')
 	resume_dict = ast.literal_eval(resume)
-	print(resume)
-	print(type(resume))
-	print(type(resume_dict))
 	return render(request, 'formuploads/resume.html',{'resume': resume_dict})
 
+
 def resume_download(request,resume_dict):
-
-	print(resume_dict)
 	return render(request,'formuploads/resume.html',{'resume': resume_dict})
-
-
