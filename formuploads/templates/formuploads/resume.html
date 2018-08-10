@@ -59,7 +59,7 @@
                 <h3>{{education.name}}</h3>
                 <h4><i>{{education.degree}}</i></h4>
                 {%if education.start_date and education.end_date %}
-                <div class="date">{{education.start_date}} to {{ education.end_date }}</div>
+                <div class="date">{{education.start_date}} - {{ education.end_date }}</div>
                 {%endif%}
                 {% if education.description %}
                   <div class="description">
@@ -81,7 +81,7 @@
               <h3>{{ experience.name }}</h3>
               <h4><i>{{ experience.designation }}</i></h4>
               {%if experience.start_date and experience.end_date %}
-              <div class="date">{{ experience.start_date }} to {{ experience.end_date }}</div>
+              <div class="date">{{ experience.start_date }} - {{ experience.end_date }}</div>
               {%endif%}
               <div class="description">
                 <p>{{ experience.description }}</p>

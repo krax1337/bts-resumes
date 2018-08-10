@@ -24,6 +24,7 @@ function dec_exp() {
 
 var edu = 0;
 var exp = 0;
+var lan = 0;
 
 function new_education() {
     var r = document.createElement('div');
@@ -149,65 +150,40 @@ function new_experinece() {
 }
 
 
-function new_experinece() {
+function new_language() {
     var r = document.createElement('div');
-    exp += 1;
-    r.setAttribute("id", 'exp' + exp);
+    lan += 1;
+    r.setAttribute("id", 'lan' + lan);
 
     r.setAttribute("class", 'element_ed');
-    increment_exp();
+    increment_lan();
 
     var y = document.createElement("INPUT");
     y.setAttribute("type", "text");
-    y.setAttribute("placeholder", "Название компании");
+    y.setAttribute("placeholder", "Название языка");
     y.setAttribute("class", "form-control");
     y.setAttribute("style", " text-align:center");
-    y.setAttribute("name", "experience_name" + i_ex);
-    y.setAttribute("id", i_ex);
+    y.setAttribute("name", "language_name" + i_la);
+    y.setAttribute("id", i_la);
     y.required = true;
 
 
     var y_2 = document.createElement("INPUT");
     y_2.setAttribute("type", "text");
-    y_2.setAttribute("placeholder", "Должность");
+    y_2.setAttribute("placeholder", "Уровень владения");
     y_2.setAttribute("class", "form-control");
     y_2.setAttribute("style", " text-align:center");
-    y_2.setAttribute("name", "experience_designation" + i_ex);
-    y_2.setAttribute("id", i_ex);
+    y_2.setAttribute("name", "language_level" + i_la);
+    y_2.setAttribute("id", i_la);
 
-    var y_3 = document.createElement("INPUT");
-    y_3.setAttribute("type", "text");
-    y_3.setAttribute("placeholder", "Начало работы");
-    y_3.setAttribute("class", "form-control");
-    y_3.setAttribute("style", " text-align:center");
-    y_3.setAttribute("name", "experience_start_date" + i_ex);
-    y_3.setAttribute("id", i_ex);
-
-    var y_4 = document.createElement("INPUT");
-    y_4.setAttribute("type", "text");
-    y_4.setAttribute("placeholder", "Конец работы");
-    y_4.setAttribute("class", "form-control");
-    y_4.setAttribute("style", " text-align:center");
-    y_4.setAttribute("name", "experience_end_date" + i_ex);
-    y_4.setAttribute("id", i_ex);
-
-    var y_5 = document.createElement("TEXTAREA");
-    y_5.setAttribute("type", "text");
-    y_5.setAttribute("placeholder", "Описание");
-    y_5.setAttribute("class", "form-control");
-    y_5.setAttribute("style", " text-align:center");
-    y_5.setAttribute("name", "experience_description" + i_ex);
-    y_5.setAttribute("id", i_ex);
 
 
     r.appendChild(y);
     r.appendChild(y_2);
-    r.appendChild(y_3);
-    r.appendChild(y_4);
-    r.appendChild(y_5);
 
-    document.getElementById("i_ex").value = i_ex;
-    document.getElementById("experiences").appendChild(r);
+
+    document.getElementById("i_la").value = i_la;
+    document.getElementById("languages").appendChild(r);
 }
 
 function removeElement_edu() {
@@ -224,4 +200,12 @@ function removeElement_exp() {
     elem = document.getElementById("exp" + exp);
     elem.remove();
     exp -= 1;
+}
+
+function removeElement_lan() {
+    document.getElementById("i_la").value = i_la - 1;
+    i_la -= 1;
+    elem = document.getElementById("lan" + lan);
+    elem.remove();
+    lan -= 1;
 }

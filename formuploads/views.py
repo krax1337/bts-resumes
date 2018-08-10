@@ -138,6 +138,7 @@ def resume_create(request):
 	resume['about'] = request.GET.get('about')
 	resume['educations'] = [{}]
 	resume['experiences'] = [{}]
+	resume['languages'] = [{}]
 
 	counter_1 = 0
 	try:
@@ -184,6 +185,25 @@ def resume_create(request):
 			'description': request.GET.get('experience_description' + str(counter_2)),
 		})
 	resume['experiences'].pop(0)
+
+	counter_3 = 0
+	try:
+		counter_3_stp = int(request.GET.get('counter_3'))
+	except:
+		counter_3_stp = 0
+
+	if(counter_3_stp == '0' or None):
+		counter_3_stp = 0
+
+	while True:
+		counter_3 += 1
+		if(counter_3 > counter_3_stp):
+			break
+		resume['languages'].append({
+			'name': request.GET.get('language_name' + str(counter_3)),
+			'level': request.GET.get('language_level' + str(counter_3)),
+		})
+	resume['languages'].pop(0)
 
 	return render(request, 'formuploads/resume_create.html',{'resume': resume})
 
