@@ -1,13 +1,13 @@
-# 💖[Наш сайт](https://bts-resumes.herokuapp.com)💖
+# BTS Resumes - resume parser and job search
 
-## О сайте
+## About the project
 
-Наш сайт, предоставляет возможность быстрого поиска работы на онлайн бирже труда. А также полноценный парсинг любых видов резюме и подбор наиболее релевантных вакансий. 
+Our site provides the ability to quickly find work at the labor exchange. And also full-fledged parsing of any type of resume and selection of the most relevant vacancies.
 
-> Проект сделан для компании BTS Digital
+> The project was made for BTS Digital
 
-## Над проектом работают
-[Асанали](https://github.com/krax1337)
-[Амина](https://github.com/qwerty-ace)
-[Изат](https://github.com/izatkhamiyev)
+## Working on the project
+[Asanali](https://github.com/krax1337)
+[Amina](https://github.com/qwerty-ace)
+[Izat](https://github.com/izatkhamiyev)
 
